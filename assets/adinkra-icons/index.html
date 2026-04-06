@@ -2,8 +2,9 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Adinkra · алфавит символов</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adinkra алфавит · символы акан</title>
+    <!-- Подключаем ваш же CSS из папки css/ (работает как относительный путь) -->
     <link rel="stylesheet" href="css/icons.css">
     <style>
         * {
@@ -59,16 +60,6 @@
             margin-left: auto;
             margin-right: auto;
             line-height: 1.4;
-        }
-
-        .local-note {
-            background: #f0ebe3;
-            border-radius: 48px;
-            padding: 0.4rem 1rem;
-            font-size: 0.75rem;
-            display: inline-block;
-            margin-top: 0.8rem;
-            color: #7e6b55;
         }
 
         .alphabet-grid {
@@ -153,7 +144,7 @@
 
         @media (max-width: 580px) {
             body { padding: 1.2rem; }
-            .alphabet-grid { gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+            .alphabet-grid { gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(130px,1fr)); }
             .icon-wrapper { font-size: 2.8rem; }
             .symbol-name { font-size: 0.85rem; }
         }
@@ -163,11 +154,7 @@
 <div class="container">
     <div class="header">
         <h1>Adinkra <span>алфавит</span></h1>
-        <div class="sub">
-            ✦ символы мудрости, философии и наследия акан ✦<br>
-            минималистичный справочник • иконки из библиотеки Adinkra Icons
-        </div>
-        <div class="local-note">✓ безопасно для локального просмотра (без активных ссылок)</div>
+        <div class="sub">✦ символы мудрости, философии и наследия акан ✦</div>
     </div>
 
     <div id="adinkra-grid" class="alphabet-grid"></div>
@@ -178,7 +165,7 @@
 
 <script>
     (function() {
-        // Символы Adinkra (классы из официального CSS)
+        // Список символов Adinkra (классы из вашего CSS)
         const adinkraSymbols = [
             { className: "adinkra-adinkrahene", akanName: "Adinkrahene", meaning: "вождь / величие" },
             { className: "adinkra-akoben", akanName: "Akoben", meaning: "военный рог / бдительность" },
@@ -209,23 +196,23 @@
             { className: "adinkra-nyame-nwu", akanName: "Nyame Nwu", meaning: "бессмертие Бога" }
         ];
 
-        // Алфавитный порядок по названию акан
+        // Сортировка по названию акан (алфавитный порядок)
         const sorted = [...adinkraSymbols].sort((a,b) => a.akanName.localeCompare(b.akanName));
 
         const grid = document.getElementById('adinkra-grid');
         if (!grid) return;
-
         grid.innerHTML = '';
+
         for (const sym of sorted) {
             const card = document.createElement('div');
             card.className = 'symbol-card';
 
-            const iconWrap = document.createElement('div');
-            iconWrap.className = 'icon-wrapper';
+            const iconWrapper = document.createElement('div');
+            iconWrapper.className = 'icon-wrapper';
             const icon = document.createElement('i');
             icon.className = sym.className;
             icon.setAttribute('aria-label', `Adinkra: ${sym.akanName}`);
-            iconWrap.appendChild(icon);
+            iconWrapper.appendChild(icon);
 
             const nameDiv = document.createElement('div');
             nameDiv.className = 'symbol-name';
@@ -235,7 +222,7 @@
             meaningDiv.className = 'symbol-meaning';
             meaningDiv.textContent = sym.meaning;
 
-            card.appendChild(iconWrap);
+            card.appendChild(iconWrapper);
             card.appendChild(nameDiv);
             card.appendChild(meaningDiv);
             grid.appendChild(card);
