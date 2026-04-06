@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'adinkraiconfont';
-  src: url('../fonts/adinkraiconfont.eot');
-  src: url('../fonts/adinkraiconfont.eot') format('embedded-opentype'), url('../fonts/adinkraiconfont.woff2') format('woff2'), url('../fonts/adinkraiconfont.woff') format('woff'), url('../fonts/adinkraiconfont.ttf') format('truetype'), url('../fonts/adinkraiconfont.svg') format('svg');
+  src: url('https://ahiakwa.github.io/assets/adinkra-icons/fonts/adinkraiconfont.eot');
+  src: url('https://ahiakwa.github.io/assets/adinkra-icons/fonts/adinkraiconfont.eot') format('embedded-opentype'), url('https://ahiakwa.github.io/assets/adinkra-icons/fonts/adinkraiconfont.woff2') format('woff2'), url('https://ahiakwa.github.io/assets/adinkra-icons/fonts/adinkraiconfont.woff') format('woff'), url('https://ahiakwa.github.io/assets/adinkra-icons/fonts/adinkraiconfont.ttf') format('truetype'), url('https://ahiakwa.github.io/assets/adinkra-icons/fonts/adinkraiconfont.svg') format('svg');
   font-weight: normal;
   font-style: normal;
 }
