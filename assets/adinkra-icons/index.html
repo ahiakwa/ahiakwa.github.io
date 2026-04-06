@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Adinkra алфавит · символы акан</title>
+  <title>Adinkra · библиотека символов и алфавит акан</title>
+  <!-- Иконочный шрифт Adinkra (CSS-классы) -->
   <link rel="stylesheet" href="https://ahiakwa.github.io/assets/adinkra-icons/css/icons.css" />
+  <!-- Font Awesome 6 (иконки интерфейса) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -22,575 +24,381 @@
     .toolbar{ display:flex; gap:.75rem; justify-content:center; align-items:center; margin:0 auto 1.25rem auto; flex-wrap:wrap; }
     .toolbar input{ width:min(540px, 100%); border:1px solid #ddd2c6; border-radius:999px; padding:.8rem 1rem; background:#fff; outline:none; font:inherit; }
     .toolbar input:focus{ border-color:#c9b29d; box-shadow:0 0 0 3px rgba(178,107,59,.12); }
-    .alphabet-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:1.2rem; }
+    .alphabet-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:1.2rem; margin-bottom:3rem; }
     .symbol-card{ background:var(--panel); border-radius:28px; padding:1.2rem .8rem 1rem; text-align:center; transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease; box-shadow:0 2px 6px rgba(0,0,0,.02),0 1px 2px rgba(0,0,0,.03); border:1px solid var(--soft); }
     .symbol-card:hover{ transform:translateY(-4px); box-shadow:0 16px 24px -12px rgba(0,0,0,.08),0 4px 10px rgba(0,0,0,.02); border-color:#dcd2c6; background:#fefefc; }
     .icon-wrapper{ font-size:3.4rem; line-height:1; margin-bottom:.85rem; display:flex; justify-content:center; align-items:center; min-height:84px; }
     .adk{ display:inline-block; line-height:1; font-style:normal; font:normal normal normal 1em/1 'adinkraiconfont'; color:inherit; flex-shrink:0; speak:none; text-transform:none; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
     .symbol-name{ font-weight:520; font-size:1rem; letter-spacing:-.2px; color:#2f2c28; margin-bottom:.35rem; background:#faf8f4; display:inline-block; padding:.12rem .55rem; border-radius:999px; }
     .symbol-meaning{ font-size:.75rem; color:#857a6b; text-transform:uppercase; letter-spacing:.3px; font-weight:430; margin-top:.25rem; border-top:1px solid #f0e9e1; padding-top:.55rem; display:inline-block; width:100%; }
-    .footer-note{ margin-top:3.5rem; text-align:center; font-size:.75rem; color:#b1a694; border-top:1px solid #e9e2d8; padding-top:1.8rem; letter-spacing:.2px; }
-    @media (max-width:580px){ body{ padding:1.1rem; } .alphabet-grid{ gap:.95rem; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); } .icon-wrapper{ font-size:2.8rem; min-height:72px; } .symbol-name{ font-size:.85rem; } }
+    
+    /* ----- НОВЫЙ РАЗДЕЛ: ГЛИФЫ И АЛФАВИТ (Adinkra-Regular.ttf) ----- */
+    .glyph-section {
+      margin: 2.5rem 0 1rem;
+      border-top: 2px solid var(--line);
+      padding-top: 2rem;
+    }
+    .glyph-title {
+      font-size: 1.5rem;
+      font-weight: 480;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1.2rem;
+      color: #3c2e23;
+    }
+    .glyph-title i { color: var(--accent); font-size: 1.4rem; }
+    .glyph-sub {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 1.8rem;
+      border-left: 3px solid var(--accent);
+      padding-left: 1rem;
+    }
+    .alphabet-grid.glyph-grid {
+      grid-template-columns: repeat(auto-fill, minmax(110px, 130px));
+      gap: 1rem;
+    }
+    .glyph-card {
+      background: var(--panel);
+      border-radius: 1.2rem;
+      padding: 0.9rem 0.3rem;
+      text-align: center;
+      border: 1px solid var(--soft);
+      transition: all 0.2s;
+    }
+    .glyph-card:hover {
+      border-color: #cfbcab;
+      background: #fffaf3;
+    }
+    .glyph-symbol {
+      font-family: 'AdinkraAlphabet', 'Segoe UI Symbol', monospace;
+      font-size: 2.8rem;
+      line-height: 1.2;
+      margin-bottom: 0.3rem;
+      color: #2b241d;
+    }
+    .glyph-latin {
+      font-family: monospace;
+      font-weight: 600;
+      background: #ece3d9;
+      display: inline-block;
+      padding: 0.15rem 0.6rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      color: #5f4d38;
+    }
+    .glyph-name {
+      font-size: 0.65rem;
+      color: #9e8873;
+      margin-top: 0.4rem;
+    }
+    .live-test-area {
+      background: #fef9f3;
+      border-radius: 1.5rem;
+      padding: 1.3rem;
+      margin: 1.8rem 0 1rem;
+      border: 1px solid #e6dacf;
+    }
+    .live-test-area label {
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.6rem;
+    }
+    .live-test-area input {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      font-family: 'AdinkraAlphabet', monospace;
+      font-size: 1rem;
+      background: white;
+      border: 1px solid #dbcfc0;
+      border-radius: 1rem;
+      outline: none;
+    }
+    .live-test-area input:focus {
+      border-color: #c28144;
+      box-shadow: 0 0 0 3px rgba(194,129,68,0.1);
+    }
+    .preview-block {
+      background: white;
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 1rem;
+      border: 1px solid #ede2d5;
+    }
+    .preview-adinkra {
+      font-family: 'AdinkraAlphabet', 'Segoe UI Symbol', monospace;
+      font-size: 1.6rem;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+    @font-face {
+      font-family: 'AdinkraAlphabet';
+      src: url('https://ahiakwa.github.io/assets/adinkra-icons/fonts/Adinkra-Regular.ttf') format('truetype');
+      font-display: swap;
+    }
+
+    .footer-note{ margin-top:2.5rem; text-align:center; font-size:.75rem; color:#b1a694; border-top:1px solid #e9e2d8; padding-top:1.8rem; letter-spacing:.2px; }
+    @media (max-width:580px){ body{ padding:1.1rem; } .alphabet-grid{ gap:.95rem; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); } .icon-wrapper{ font-size:2.8rem; min-height:72px; } .symbol-name{ font-size:.85rem; } .glyph-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); } .glyph-symbol { font-size: 2.2rem; } }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1>Adinkra</h1>
-      <div class="sub">✦ Библиотека семантических операторов культуры ✦</div>
-    </div>
-    <div id="status" class="status"></div>
-    <div class="toolbar"><input id="search" type="search" placeholder="Поиск по названию или классу…" autocomplete="off" /></div>
-    <div id="adinkra-grid" class="alphabet-grid"></div>
-    <div class="footer-note">отображаются только те символы, которые реально объявлены в <code>css/icons.css</code></div>
+<div class="container">
+  <div class="header">
+    <h1>Adinkra <span>✦</span></h1>
+    <div class="sub">✦ Библиотека семантических операторов культуры ✦</div>
   </div>
-  <script>
-    const SYMBOLS = [
-  {
-    "className": "aban",
-    "label": "Aban",
-    "meaning": "защита / крепость"
-  },
-  {
-    "className": "abe-dua",
-    "label": "Abe Dua",
-    "meaning": "пальма / стойкость"
-  },
-  {
-    "className": "abusua-pa",
-    "label": "Abusua Pa",
-    "meaning": "хороший род"
-  },
-  {
-    "className": "adinkrahene",
-    "label": "Adinkrahene",
-    "meaning": "величие / лидерство"
-  },
-  {
-    "className": "adwo",
-    "label": "Adwo",
-    "meaning": "спокойствие"
-  },
-  {
-    "className": "agyindawuru",
-    "label": "Agyindawuru",
-    "meaning": "колокол уважения"
-  },
-  {
-    "className": "akoben",
-    "label": "Akoben",
-    "meaning": "военный рог / бдительность"
-  },
-  {
-    "className": "akofena",
-    "label": "Akofena",
-    "meaning": "меч войны / мужество"
-  },
-  {
-    "className": "akoko-nan",
-    "label": "Akoko Nan",
-    "meaning": "куриная лапа / забота"
-  },
-  {
-    "className": "akoma",
-    "label": "Akoma",
-    "meaning": "сердце / терпение"
-  },
-  {
-    "className": "akoma-ntoso",
-    "label": "Akoma Ntoso",
-    "meaning": "сердца, связанные вместе"
-  },
-  {
-    "className": "ananse-ntontan",
-    "label": "Ananse Ntontan",
-    "meaning": "паутинная сеть / мудрость"
-  },
-  {
-    "className": "ani-bere-enso-gya",
-    "label": "Ani Bere Enso Gya",
-    "meaning": "терпение"
-  },
-  {
-    "className": "anyi-me-aye-a",
-    "label": "Anyi Me Aye A",
-    "meaning": "не завидую"
-  },
-  {
-    "className": "asaawa",
-    "label": "Asaawa",
-    "meaning": "прямота / честность"
-  },
-  {
-    "className": "asase-ye-duru",
-    "label": "Asase Ye Duru",
-    "meaning": "земля имеет вес"
-  },
-  {
-    "className": "asetena-pa",
-    "label": "Asetena Pa",
-    "meaning": "хорошая жизнь"
-  },
-  {
-    "className": "awurade-baatanfo",
-    "label": "Awurade Baatanfo",
-    "meaning": "божественное материнство"
-  },
-  {
-    "className": "aya",
-    "label": "Aya",
-    "meaning": "папоротник / стойкость"
-  },
-  {
-    "className": "bese-saka",
-    "label": "Bese Saka",
-    "meaning": "мешок с орехами кола / изобилие"
-  },
-  {
-    "className": "bi-nka-bi",
-    "label": "Bi Nka Bi",
-    "meaning": "никого не задевай"
-  },
-  {
-    "className": "boa-me-na-me-mmoa-wo",
-    "label": "Boa Me Na Me Mmoa Wo",
-    "meaning": "помоги мне и я помогу тебе"
-  },
-  {
-    "className": "boafo-ye-na",
-    "label": "Boafo Ye Na",
-    "meaning": "помощник"
-  },
-  {
-    "className": "dame-dame",
-    "label": "Dame Dame",
-    "meaning": "игра / стратегия"
-  },
-  {
-    "className": "denkyem",
-    "label": "Denkyem",
-    "meaning": "крокодил / приспособляемость"
-  },
-  {
-    "className": "dono",
-    "label": "Dono",
-    "meaning": "барабан"
-  },
-  {
-    "className": "dono-ntoaso",
-    "label": "Dono Ntoaso",
-    "meaning": "барабан и связь"
-  },
-  {
-    "className": "duafe",
-    "label": "Duafe",
-    "meaning": "гребень / красота"
-  },
-  {
-    "className": "dwennimmen",
-    "label": "Dwennimmen",
-    "meaning": "овеньи рога / смирение и сила"
-  },
-  {
-    "className": "eban",
-    "label": "Eban",
-    "meaning": "ограда / безопасность"
-  },
-  {
-    "className": "epa",
-    "label": "Epa",
-    "meaning": "закон / справедливость"
-  },
-  {
-    "className": "ese-ne-tekrema",
-    "label": "Ese Ne Tekrema",
-    "meaning": "зуб и язык"
-  },
-  {
-    "className": "esono-anantam",
-    "label": "Esono Anantam",
-    "meaning": "слон идёт"
-  },
-  {
-    "className": "fafanto",
-    "label": "Fafanto",
-    "meaning": "бабочка"
-  },
-  {
-    "className": "fawohodie",
-    "label": "Fawohodie",
-    "meaning": "свобода"
-  },
-  {
-    "className": "fihankra",
-    "label": "Fihankra",
-    "meaning": "дом / защита"
-  },
-  {
-    "className": "fofo",
-    "label": "Fofo",
-    "meaning": "цветок"
-  },
-  {
-    "className": "funtunfunefu-denkyemfunefu",
-    "label": "Funtunfunefu Denkyemfunefu",
-    "meaning": "единство"
-  },
-  {
-    "className": "gye-nyame",
-    "label": "Gye Nyame",
-    "meaning": "божественное верховенство"
-  },
-  {
-    "className": "gye-wani",
-    "label": "Gye Wani",
-    "meaning": "будь бдителен"
-  },
-  {
-    "className": "hwe-mu-dua",
-    "label": "Hwe Mu Dua",
-    "meaning": "измерительная линейка"
-  },
-  {
-    "className": "hye-won-hye",
-    "label": "Hye Won Hye",
-    "meaning": "невыгораемость / стойкость"
-  },
-  {
-    "className": "kete-pa",
-    "label": "Kete Pa",
-    "meaning": "хорошее полотно"
-  },
-  {
-    "className": "kintinkantan",
-    "label": "Kintinkantan",
-    "meaning": "величие / самоуверенность"
-  },
-  {
-    "className": "kokuromotie",
-    "label": "Kokuromotie",
-    "meaning": "красноречие"
-  },
-  {
-    "className": "kramo-bone-amma-yeanhu-kramo-pa",
-    "label": "Kramo Bone Amma Yeanhu Kramo Pa",
-    "meaning": "не суди по плохому"
-  },
-  {
-    "className": "kuronti-ne-akwamu",
-    "label": "Kuronti Ne Akwamu",
-    "meaning": "союз"
-  },
-  {
-    "className": "kwatakye-atiko",
-    "label": "Kwatakye Atiko",
-    "meaning": "воинская храбрость"
-  },
-  {
-    "className": "kyemfere",
-    "label": "Kyemfere",
-    "meaning": "палитра / красота"
-  },
-  {
-    "className": "mako",
-    "label": "Mako",
-    "meaning": "перец / острота"
-  },
-  {
-    "className": "mate-masie",
-    "label": "Mate Masie",
-    "meaning": "я слышал и сохранил"
-  },
-  {
-    "className": "me-ware-wo",
-    "label": "Me Ware Wo",
-    "meaning": "я женюсь на тебе"
-  },
-  {
-    "className": "mekyia-wo",
-    "label": "Mekyia Wo",
-    "meaning": "я приветствую тебя"
-  },
-  {
-    "className": "menso-wo-kenten",
-    "label": "Menso Wo Kenten",
-    "meaning": "я не ношу твой корзину"
-  },
-  {
-    "className": "mframadan",
-    "label": "Mframadan",
-    "meaning": "дом ветров"
-  },
-  {
-    "className": "mmere-dane",
-    "label": "Mmere Dane",
-    "meaning": "время меняется"
-  },
-  {
-    "className": "mmusuyidee",
-    "label": "Mmusuyidee",
-    "meaning": "благословение"
-  },
-  {
-    "className": "mo-no-yo",
-    "label": "Mo No Yo",
-    "meaning": "добро для всех"
-  },
-  {
-    "className": "mpatapo",
-    "label": "Mpatapo",
-    "meaning": "узел примирения"
-  },
-  {
-    "className": "mpuannum",
-    "label": "Mpuannum",
-    "meaning": "пять пучков волос"
-  },
-  {
-    "className": "mrammuo",
-    "label": "Mrammuo",
-    "meaning": "наказ / дисциплина"
-  },
-  {
-    "className": "nante-yie",
-    "label": "Nante Yie",
-    "meaning": "иди хорошо"
-  },
-  {
-    "className": "nea-onnim",
-    "label": "Nea Onnim",
-    "meaning": "невежество"
-  },
-  {
-    "className": "nea-ope-se-obedi-hene",
-    "label": "Nea Ope Se Obedi Hene",
-    "meaning": "тот, кто желает быть королём"
-  },
-  {
-    "className": "nkonsonkonson",
-    "label": "Nkonsonkonson",
-    "meaning": "связи / цепь"
-  },
-  {
-    "className": "nkotimsefo-mpua",
-    "label": "Nkotimsefo Mpua",
-    "meaning": "щетина антилопы"
-  },
-  {
-    "className": "nkrabea",
-    "label": "Nkrabea",
-    "meaning": "судьба"
-  },
-  {
-    "className": "nkyimu",
-    "label": "Nkyimu",
-    "meaning": "разделение / линии"
-  },
-  {
-    "className": "nkyinkyim",
-    "label": "Nkyinkyim",
-    "meaning": "инициатива / изобретательность"
-  },
-  {
-    "className": "nnampo-pa-baanu",
-    "label": "Nnampo Pa Baanu",
-    "meaning": "две хорошие пары"
-  },
-  {
-    "className": "nokore",
-    "label": "Nokore",
-    "meaning": "истина"
-  },
-  {
-    "className": "nsaa",
-    "label": "Nsaa",
-    "meaning": "качество / мастерство"
-  },
-  {
-    "className": "nserewa",
-    "label": "Nserewa",
-    "meaning": "раковина каури"
-  },
-  {
-    "className": "nsoromma",
-    "label": "Nsoromma",
-    "meaning": "звезда / божественная опека"
-  },
-  {
-    "className": "nteasee",
-    "label": "Nteasee",
-    "meaning": "согласие"
-  },
-  {
-    "className": "nya-gyidie",
-    "label": "Nya Gyidie",
-    "meaning": "вера"
-  },
-  {
-    "className": "nyame-biribi-wo-soro",
-    "label": "Nyame Biribi Wo Soro",
-    "meaning": "у Бога есть нечто на небе"
-  },
-  {
-    "className": "nyame-dua",
-    "label": "Nyame Dua",
-    "meaning": "алтарь Бога"
-  },
-  {
-    "className": "nyame-nnwu-na-mawu",
-    "label": "Nyame Nnwu Na Mawu",
-    "meaning": "Бог не умирает, я не умру"
-  },
-  {
-    "className": "nyame-nti",
-    "label": "Nyame Nti",
-    "meaning": "ради Бога"
-  },
-  {
-    "className": "nyame-ye-ohene",
-    "label": "Nyame Ye Ohene",
-    "meaning": "Бог есть царь"
-  },
-  {
-    "className": "nyansapo",
-    "label": "Nyansapo",
-    "meaning": "узел мудрости"
-  },
-  {
-    "className": "obohemmaa",
-    "label": "Obohemmaa",
-    "meaning": "королева-мать"
-  },
-  {
-    "className": "odo-nyera-fie-kwan",
-    "label": "Odo Nyera Fie Kwan",
-    "meaning": "любовь не теряет дорогу домой"
-  },
-  {
-    "className": "okodee-mmowere",
-    "label": "Okodee Mmowere",
-    "meaning": "когти орла / отвага"
-  },
-  {
-    "className": "okuafo-pa",
-    "label": "Okuafo Pa",
-    "meaning": "хороший фермер"
-  },
-  {
-    "className": "onyankopon-adom-nti-biribiara-beye-yie",
-    "label": "Onyankopon Adom Nti Biribiara Beye Yie",
-    "meaning": "по благодати Бога всё будет хорошо"
-  },
-  {
-    "className": "osram-ne-nsoromma",
-    "label": "Osram Ne Nsoromma",
-    "meaning": "луна и звезда"
-  },
-  {
-    "className": "owo-foro-adobe",
-    "label": "Owo Foro Adobe",
-    "meaning": "змея и ступень"
-  },
-  {
-    "className": "owuo-atwedee",
-    "label": "Owuo Atwedee",
-    "meaning": "лестница смерти"
-  },
-  {
-    "className": "pempamsie",
-    "label": "Pempamsie",
-    "meaning": "будь готов / колючки"
-  },
-  {
-    "className": "sankofa-one",
-    "label": "Sankofa",
-    "meaning": "возвращение к истокам"
-  },
-  {
-    "className": "sankofa-two",
-    "label": "Sankofa",
-    "meaning": "возвращение к истокам"
-  },
-  {
-    "className": "sepow",
-    "label": "Sepow",
-    "meaning": "меч"
-  },
-  {
-    "className": "sesa-wo-suban",
-    "label": "Sesa Wo Suban",
-    "meaning": "измени свой характер"
-  },
-  {
-    "className": "som-onyankopon",
-    "label": "Som Onyankopon",
-    "meaning": "служи Богу"
-  },
-  {
-    "className": "sunsum",
-    "label": "Sunsum",
-    "meaning": "дух"
-  },
-  {
-    "className": "tabono",
-    "label": "Tabono",
-    "meaning": "весло / упорство"
-  },
-  {
-    "className": "tamfo-bebre",
-    "label": "Tamfo Bebre",
-    "meaning": "враг страдает"
-  },
-  {
-    "className": "uac-nkanea",
-    "label": "UAC Nkanea",
-    "meaning": "лампа"
-  },
-  {
-    "className": "wawa-aba",
-    "label": "Wawa Aba",
-    "meaning": "семя дерева вава / стойкость"
-  },
-  {
-    "className": "wo-nsa-da-mu",
-    "label": "Wo Nsa Da Mu",
-    "meaning": "твои руки внутри"
-  },
-  {
-    "className": "woforo-dua-pa",
-    "label": "Woforo Dua Pa",
-    "meaning": "если лезешь на хорошее дерево"
+  <div id="status" class="status"></div>
+  <div class="toolbar">
+    <input id="search" type="search" placeholder="Поиск по названию или классу…" autocomplete="off" />
+  </div>
+  <div id="adinkra-grid" class="alphabet-grid"></div>
+
+  <!-- НОВЫЙ РАЗДЕЛ: ГЛИФЫ И АЛФАВИТ -->
+  <div class="glyph-section">
+    <div class="glyph-title">
+      <i class="fas fa-font"></i> 
+      Глифы и алфавит
+      <i class="fas fa-arrow-right" style="font-size: 1rem; opacity: 0.7;"></i>
+    </div>
+    <div class="glyph-sub">
+      Соответствие латинских букв символам Adinkra. Каждая буква отображается как отдельный культурный знак.
+    </div>
+    <div id="alphabet-mapping" class="alphabet-grid glyph-grid"></div>
+
+    <div class="live-test-area">
+      <label><i class="fas fa-pen-fancy"></i> Интерактивный тест шрифта</label>
+      <input type="text" id="alphabetTestInput" placeholder="Например: SANKOFA или GYE NYAME" value="AKOMA NTOSO">
+      <div class="preview-block">
+        <div class="preview-adinkra" id="alphabetPreview">AKOMA NTOSO</div>
+      </div>
+      <div style="font-size: 0.7rem; color: #b48c68; margin-top: 0.6rem;">
+        <i class="fas fa-info-circle"></i> Вводите латиницу — текст автоматически отобразится шрифтом Adinkra.
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="footer-note">
+    <i class="fas fa-shield-alt"></i> отображаются только те символы, которые реально объявлены в css/icons.css · алфавитная секция использует отдельный шрифт Adinkra-Regular.ttf
+  </div> -->
+</div>
+
+<script>
+  // ----- ОРИГИНАЛЬНЫЙ СПИСОК СИМВОЛОВ (из файла) -----
+  const SYMBOLS = [
+    { "className": "aban", "label": "Aban", "meaning": "защита / крепость" },
+    { "className": "abe-dua", "label": "Abe Dua", "meaning": "пальма / стойкость" },
+    { "className": "abusua-pa", "label": "Abusua Pa", "meaning": "хороший род" },
+    { "className": "adinkrahene", "label": "Adinkrahene", "meaning": "величие / лидерство" },
+    { "className": "adwo", "label": "Adwo", "meaning": "спокойствие" },
+    { "className": "agyindawuru", "label": "Agyindawuru", "meaning": "колокол уважения" },
+    { "className": "akoben", "label": "Akoben", "meaning": "военный рог / бдительность" },
+    { "className": "akofena", "label": "Akofena", "meaning": "меч войны / мужество" },
+    { "className": "akoko-nan", "label": "Akoko Nan", "meaning": "куриная лапа / забота" },
+    { "className": "akoma", "label": "Akoma", "meaning": "сердце / терпение" },
+    { "className": "akoma-ntoso", "label": "Akoma Ntoso", "meaning": "сердца, связанные вместе" },
+    { "className": "ananse-ntontan", "label": "Ananse Ntontan", "meaning": "паутинная сеть / мудрость" },
+    { "className": "ani-bere-enso-gya", "label": "Ani Bere Enso Gya", "meaning": "терпение" },
+    { "className": "anyi-me-aye-a", "label": "Anyi Me Aye A", "meaning": "не завидую" },
+    { "className": "asaawa", "label": "Asaawa", "meaning": "прямота / честность" },
+    { "className": "asase-ye-duru", "label": "Asase Ye Duru", "meaning": "земля имеет вес" },
+    { "className": "asetena-pa", "label": "Asetena Pa", "meaning": "хорошая жизнь" },
+    { "className": "awurade-baatanfo", "label": "Awurade Baatanfo", "meaning": "божественное материнство" },
+    { "className": "aya", "label": "Aya", "meaning": "папоротник / стойкость" },
+    { "className": "bese-saka", "label": "Bese Saka", "meaning": "мешок с орехами кола / изобилие" },
+    { "className": "bi-nka-bi", "label": "Bi Nka Bi", "meaning": "никого не задевай" },
+    { "className": "boa-me-na-me-mmoa-wo", "label": "Boa Me Na Me Mmoa Wo", "meaning": "помоги мне и я помогу тебе" },
+    { "className": "boafo-ye-na", "label": "Boafo Ye Na", "meaning": "помощник" },
+    { "className": "dame-dame", "label": "Dame Dame", "meaning": "игра / стратегия" },
+    { "className": "denkyem", "label": "Denkyem", "meaning": "крокодил / приспособляемость" },
+    { "className": "dono", "label": "Dono", "meaning": "барабан" },
+    { "className": "dono-ntoaso", "label": "Dono Ntoaso", "meaning": "барабан и связь" },
+    { "className": "duafe", "label": "Duafe", "meaning": "гребень / красота" },
+    { "className": "dwennimmen", "label": "Dwennimmen", "meaning": "овеньи рога / смирение и сила" },
+    { "className": "eban", "label": "Eban", "meaning": "ограда / безопасность" },
+    { "className": "epa", "label": "Epa", "meaning": "закон / справедливость" },
+    { "className": "ese-ne-tekrema", "label": "Ese Ne Tekrema", "meaning": "зуб и язык" },
+    { "className": "esono-anantam", "label": "Esono Anantam", "meaning": "слон идёт" },
+    { "className": "fafanto", "label": "Fafanto", "meaning": "бабочка" },
+    { "className": "fawohodie", "label": "Fawohodie", "meaning": "свобода" },
+    { "className": "fihankra", "label": "Fihankra", "meaning": "дом / защита" },
+    { "className": "fofo", "label": "Fofo", "meaning": "цветок" },
+    { "className": "funtunfunefu-denkyemfunefu", "label": "Funtunfunefu Denkyemfunefu", "meaning": "единство" },
+    { "className": "gye-nyame", "label": "Gye Nyame", "meaning": "божественное верховенство" },
+    { "className": "gye-wani", "label": "Gye Wani", "meaning": "будь бдителен" },
+    { "className": "hwe-mu-dua", "label": "Hwe Mu Dua", "meaning": "измерительная линейка" },
+    { "className": "hye-won-hye", "label": "Hye Won Hye", "meaning": "невыгораемость / стойкость" },
+    { "className": "kete-pa", "label": "Kete Pa", "meaning": "хорошее полотно" },
+    { "className": "kintinkantan", "label": "Kintinkantan", "meaning": "величие / самоуверенность" },
+    { "className": "kokuromotie", "label": "Kokuromotie", "meaning": "красноречие" },
+    { "className": "kramo-bone-amma-yeanhu-kramo-pa", "label": "Kramo Bone Amma Yeanhu Kramo Pa", "meaning": "не суди по плохому" },
+    { "className": "kuronti-ne-akwamu", "label": "Kuronti Ne Akwamu", "meaning": "союз" },
+    { "className": "kwatakye-atiko", "label": "Kwatakye Atiko", "meaning": "воинская храбрость" },
+    { "className": "kyemfere", "label": "Kyemfere", "meaning": "палитра / красота" },
+    { "className": "mako", "label": "Mako", "meaning": "перец / острота" },
+    { "className": "mate-masie", "label": "Mate Masie", "meaning": "я слышал и сохранил" },
+    { "className": "me-ware-wo", "label": "Me Ware Wo", "meaning": "я женюсь на тебе" },
+    { "className": "mekyia-wo", "label": "Mekyia Wo", "meaning": "я приветствую тебя" },
+    { "className": "menso-wo-kenten", "label": "Menso Wo Kenten", "meaning": "я не ношу твой корзину" },
+    { "className": "mframadan", "label": "Mframadan", "meaning": "дом ветров" },
+    { "className": "mmere-dane", "label": "Mmere Dane", "meaning": "время меняется" },
+    { "className": "mmusuyidee", "label": "Mmusuyidee", "meaning": "благословение" },
+    { "className": "mo-no-yo", "label": "Mo No Yo", "meaning": "добро для всех" },
+    { "className": "mpatapo", "label": "Mpatapo", "meaning": "узел примирения" },
+    { "className": "mpuannum", "label": "Mpuannum", "meaning": "пять пучков волос" },
+    { "className": "mrammuo", "label": "Mrammuo", "meaning": "наказ / дисциплина" },
+    { "className": "nante-yie", "label": "Nante Yie", "meaning": "иди хорошо" },
+    { "className": "nea-onnim", "label": "Nea Onnim", "meaning": "невежество" },
+    { "className": "nea-ope-se-obedi-hene", "label": "Nea Ope Se Obedi Hene", "meaning": "тот, кто желает быть королём" },
+    { "className": "nkonsonkonson", "label": "Nkonsonkonson", "meaning": "связи / цепь" },
+    { "className": "nkotimsefo-mpua", "label": "Nkotimsefo Mpua", "meaning": "щетина антилопы" },
+    { "className": "nkrabea", "label": "Nkrabea", "meaning": "судьба" },
+    { "className": "nkyimu", "label": "Nkyimu", "meaning": "разделение / линии" },
+    { "className": "nkyinkyim", "label": "Nkyinkyim", "meaning": "инициатива / изобретательность" },
+    { "className": "nnampo-pa-baanu", "label": "Nnampo Pa Baanu", "meaning": "две хорошие пары" },
+    { "className": "nokore", "label": "Nokore", "meaning": "истина" },
+    { "className": "nsaa", "label": "Nsaa", "meaning": "качество / мастерство" },
+    { "className": "nserewa", "label": "Nserewa", "meaning": "раковина каури" },
+    { "className": "nsoromma", "label": "Nsoromma", "meaning": "звезда / божественная опека" },
+    { "className": "nteasee", "label": "Nteasee", "meaning": "согласие" },
+    { "className": "nya-gyidie", "label": "Nya Gyidie", "meaning": "вера" },
+    { "className": "nyame-biribi-wo-soro", "label": "Nyame Biribi Wo Soro", "meaning": "у Бога есть нечто на небе" },
+    { "className": "nyame-dua", "label": "Nyame Dua", "meaning": "алтарь Бога" },
+    { "className": "nyame-nnwu-na-mawu", "label": "Nyame Nnwu Na Mawu", "meaning": "Бог не умирает, я не умру" },
+    { "className": "nyame-nti", "label": "Nyame Nti", "meaning": "ради Бога" },
+    { "className": "nyame-ye-ohene", "label": "Nyame Ye Ohene", "meaning": "Бог есть царь" },
+    { "className": "nyansapo", "label": "Nyansapo", "meaning": "узел мудрости" },
+    { "className": "obohemmaa", "label": "Obohemmaa", "meaning": "королева-мать" },
+    { "className": "odo-nyera-fie-kwan", "label": "Odo Nyera Fie Kwan", "meaning": "любовь не теряет дорогу домой" },
+    { "className": "okodee-mmowere", "label": "Okodee Mmowere", "meaning": "когти орла / отвага" },
+    { "className": "okuafo-pa", "label": "Okuafo Pa", "meaning": "хороший фермер" },
+    { "className": "onyankopon-adom-nti-biribiara-beye-yie", "label": "Onyankopon Adom Nti Biribiara Beye Yie", "meaning": "по благодати Бога всё будет хорошо" },
+    { "className": "osram-ne-nsoromma", "label": "Osram Ne Nsoromma", "meaning": "луна и звезда" },
+    { "className": "owo-foro-adobe", "label": "Owo Foro Adobe", "meaning": "змея и ступень" },
+    { "className": "owuo-atwedee", "label": "Owuo Atwedee", "meaning": "лестница смерти" },
+    { "className": "pempamsie", "label": "Pempamsie", "meaning": "будь готов / колючки" },
+    { "className": "sankofa-one", "label": "Sankofa", "meaning": "возвращение к истокам" },
+    { "className": "sankofa-two", "label": "Sankofa", "meaning": "возвращение к истокам" },
+    { "className": "sepow", "label": "Sepow", "meaning": "меч" },
+    { "className": "sesa-wo-suban", "label": "Sesa Wo Suban", "meaning": "измени свой характер" },
+    { "className": "som-onyankopon", "label": "Som Onyankopon", "meaning": "служи Богу" },
+    { "className": "sunsum", "label": "Sunsum", "meaning": "дух" },
+    { "className": "tabono", "label": "Tabono", "meaning": "весло / упорство" },
+    { "className": "tamfo-bebre", "label": "Tamfo Bebre", "meaning": "враг страдает" },
+    { "className": "uac-nkanea", "label": "UAC Nkanea", "meaning": "лампа" },
+    { "className": "wawa-aba", "label": "Wawa Aba", "meaning": "семя дерева вава / стойкость" },
+    { "className": "wo-nsa-da-mu", "label": "Wo Nsa Da Mu", "meaning": "твои руки внутри" },
+    { "className": "woforo-dua-pa", "label": "Woforo Dua Pa", "meaning": "если лезешь на хорошее дерево" }
+  ];
+
+  // ----- РЕНДЕР ОСНОВНОЙ БИБЛИОТЕКИ (иконочный шрифт) -----
+  const grid = document.getElementById('adinkra-grid');
+  const statusDiv = document.getElementById('status');
+  const searchInput = document.getElementById('search');
+
+  function setStatus(text, kind='ok') { 
+    statusDiv.textContent = text; 
+    statusDiv.className = 'status ' + kind; 
+    statusDiv.style.display = 'block'; 
   }
-];
-    const grid = document.getElementById('adinkra-grid');
-    const status = document.getElementById('status');
-    const search = document.getElementById('search');
-    function setStatus(text, kind='ok') { status.textContent = text; status.className = 'status ' + kind; status.style.display = 'block'; }
-    function createCard(item) {
+  function createCard(item) {
+    const card = document.createElement('div');
+    card.className = 'symbol-card';
+    card.dataset.label = item.label.toLowerCase();
+    card.dataset.className = item.className.toLowerCase();
+    const iconWrapper = document.createElement('div');
+    iconWrapper.className = 'icon-wrapper';
+    const icon = document.createElement('i');
+    icon.className = `adk adk-${item.className}`;
+    icon.setAttribute('aria-label', item.label);
+    icon.setAttribute('title', `${item.label} · ${item.className}`);
+    iconWrapper.appendChild(icon);
+    const nameDiv = document.createElement('div');
+    nameDiv.className = 'symbol-name';
+    nameDiv.textContent = item.label;
+    const meaningDiv = document.createElement('div');
+    meaningDiv.className = 'symbol-meaning';
+    meaningDiv.textContent = item.meaning;
+    card.appendChild(iconWrapper); card.appendChild(nameDiv); card.appendChild(meaningDiv);
+    return card;
+  }
+  function render(list) { 
+    grid.innerHTML = ''; 
+    for (const item of list) grid.appendChild(createCard(item)); 
+    setStatus(`Найдено ${list.length} символов из CSS.`, 'ok'); 
+  }
+  function applyFilter() { 
+    const q = searchInput.value.trim().toLowerCase(); 
+    const cards = grid.querySelectorAll('.symbol-card'); 
+    let visible = 0; 
+    cards.forEach(card => { 
+      const match = !q || card.dataset.label.includes(q) || card.dataset.className.includes(q); 
+      card.style.display = match ? '' : 'none'; 
+      if (match) visible++; 
+    }); 
+    setStatus(q ? `Показано ${visible} символов по запросу “${q}”.` : `Найдено ${cards.length} символов из CSS.`, q ? 'warn' : 'ok'); 
+  }
+
+  // ----- НОВАЯ СЕКЦИЯ: АЛФАВИТ (A-Z) с использованием Adinkra-Regular.ttf -----
+  const alphabetMapping = [
+    { letter: "A", name: "Ako (Parrot)" }, { letter: "B", name: "Bese (Sack of cola)" },
+    { letter: "C", name: "Chere (Show mercy)" }, { letter: "D", name: "Dame (Checkerboard)" },
+    { letter: "E", name: "Epa (Handcuffs)" }, { letter: "F", name: "Fihankra (House)" },
+    { letter: "G", name: "Gye Nyame (Supremacy)" }, { letter: "H", name: "Hye Won Hye (Unburnable)" },
+    { letter: "I", name: "Inkwa (Tattoo)" }, { letter: "J", name: "Jema (Sun)" },
+    { letter: "K", name: "Kintinkantan (Pompousness)" }, { letter: "L", name: "Layers of Life" },
+    { letter: "M", name: "Mframadan (Ventilated house)" }, { letter: "N", name: "Nea Onnim (Learning)" },
+    { letter: "O", name: "Onyankopon (God)" }, { letter: "P", name: "Pempamsie (Readiness)" },
+    { letter: "Q", name: "Quarter moon" }, { letter: "R", name: "Ram (Strength)" },
+    { letter: "S", name: "Sankofa (Return)" }, { letter: "T", name: "Tumi (Power)" },
+    { letter: "U", name: "Umu (Unity)" }, { letter: "V", name: "Vessel of wisdom" },
+    { letter: "W", name: "Wawa Aba (Seed)" }, { letter: "X", name: "Crossroads" },
+    { letter: "Y", name: "Yen Ara Asaase Ni (Our land)" }, { letter: "Z", name: "Zigzag (Life's twists)" }
+  ];
+
+  const alphabetContainer = document.getElementById('alphabet-mapping');
+  function renderAlphabet() {
+    if (!alphabetContainer) return;
+    alphabetContainer.innerHTML = '';
+    for (const item of alphabetMapping) {
       const card = document.createElement('div');
-      card.className = 'symbol-card';
-      card.dataset.label = item.label.toLowerCase();
-      card.dataset.className = item.className.toLowerCase();
-      const iconWrapper = document.createElement('div');
-      iconWrapper.className = 'icon-wrapper';
-      const icon = document.createElement('i');
-      icon.className = `adk adk-${item.className}`;
-      icon.setAttribute('aria-label', item.label);
-      icon.setAttribute('title', `${item.label} · ${item.className}`);
-      iconWrapper.appendChild(icon);
-      const nameDiv = document.createElement('div');
-      nameDiv.className = 'symbol-name';
-      nameDiv.textContent = item.label;
-      const meaningDiv = document.createElement('div');
-      meaningDiv.className = 'symbol-meaning';
-      meaningDiv.textContent = item.meaning;
-      card.appendChild(iconWrapper); card.appendChild(nameDiv); card.appendChild(meaningDiv);
-      return card;
+      card.className = 'glyph-card';
+      const glyphSpan = document.createElement('div');
+      glyphSpan.className = 'glyph-symbol';
+      glyphSpan.textContent = item.letter;
+      const latinSpan = document.createElement('div');
+      latinSpan.className = 'glyph-latin';
+      latinSpan.textContent = item.letter;
+      const nameSpan = document.createElement('div');
+      nameSpan.className = 'glyph-name';
+      nameSpan.textContent = item.name;
+      card.appendChild(glyphSpan);
+      card.appendChild(latinSpan);
+      card.appendChild(nameSpan);
+      alphabetContainer.appendChild(card);
     }
-    function render(list) { grid.innerHTML = ''; for (const item of list) grid.appendChild(createCard(item)); setStatus(`Найдено ${list.length} символов из CSS.`, 'ok'); }
-    function applyFilter() { const q = search.value.trim().toLowerCase(); const cards = grid.querySelectorAll('.symbol-card'); let visible = 0; cards.forEach(card => { const match = !q || card.dataset.label.includes(q) || card.dataset.className.includes(q); card.style.display = match ? '' : 'none'; if (match) visible++; }); setStatus(q ? `Показано ${visible} символов по запросу “${q}”.` : `Найдено ${cards.length} символов из CSS.`, q ? 'warn' : 'ok'); }
-    function init() { const sorted = [...SYMBOLS].sort((a,b) => a.label.localeCompare(b.label, 'ru')); render(sorted); search.addEventListener('input', applyFilter); }
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true }); else init();
-  </script>
+  }
+
+  // Интерактивный тест алфавитного шрифта
+  const testInput = document.getElementById('alphabetTestInput');
+  const previewDiv = document.getElementById('alphabetPreview');
+  if (testInput && previewDiv) {
+    testInput.addEventListener('input', (e) => {
+      previewDiv.textContent = e.target.value === '' ? ' ' : e.target.value;
+    });
+    previewDiv.textContent = testInput.value;
+  }
+
+  // Инициализация
+  function init() {
+    const sorted = [...SYMBOLS].sort((a,b) => a.label.localeCompare(b.label, 'ru'));
+    render(sorted);
+    searchInput.addEventListener('input', applyFilter);
+    renderAlphabet();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true }); else init();
+</script>
 </body>
 </html>
