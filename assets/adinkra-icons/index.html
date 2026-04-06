@@ -4,497 +4,592 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Adinkra алфавит · символы акан</title>
-
-  <!-- ВАЖНО: относительный путь от /assets/adinkra-icons/index.html -->
-  <link rel="stylesheet" href="https://ahiakwa.github.io/assets/adinkra-icons/css/icons.css" />
-
+  <link rel="stylesheet" href="./css/icons.css" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    ::-webkit-scrollbar {
-      width: 0;
-      height: 0;
-    }
-
-    :root {
-      --bg: #f7f5f0;
-      --panel: #ffffff;
-      --text: #1f1e1c;
-      --muted: #6b6257;
-      --line: #e2ddd4;
-      --soft-line: #ece6de;
-      --accent: #b26b3b;
-      --soft-accent: #f0ebe3;
-    }
-
-    body {
-      background: var(--bg);
-      font-family: system-ui, -apple-system, "Inter", "Segoe UI", Roboto, Helvetica, sans-serif;
-      padding: 2rem 1.5rem;
-      color: var(--text);
-    }
-
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-    }
-
-    .header {
-      text-align: center;
-      margin-bottom: 2rem;
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 1.25rem;
-    }
-
-    .header h1 {
-      font-weight: 450;
-      font-size: clamp(1.7rem, 3vw, 2.2rem);
-      letter-spacing: -0.3px;
-      color: #2c2a27;
-      margin-bottom: 0.5rem;
-    }
-
-    .header h1 span {
-      font-weight: 350;
-      color: var(--accent);
-      background: var(--soft-accent);
-      padding: 0.1rem 0.5rem;
-      border-radius: 999px;
-      font-size: 1.3rem;
-      display: inline-block;
-      vertical-align: middle;
-    }
-
-    .sub {
-      color: var(--muted);
-      font-size: 0.92rem;
-      font-weight: 400;
-      margin-top: 0.5rem;
-      max-width: 720px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.45;
-    }
-
-    .status {
-      margin: 0 auto 1.25rem auto;
-      max-width: 860px;
-      padding: 0.8rem 1rem;
-      border-radius: 16px;
-      background: #fffdf8;
-      border: 1px solid #eadfcf;
-      color: #6a5d4b;
-      font-size: 0.9rem;
-      line-height: 1.45;
-      display: none;
-    }
-
-    .status.ok {
-      display: block;
-      background: #f8fbf7;
-      border-color: #dfeadf;
-      color: #4c644d;
-    }
-
-    .status.warn {
-      display: block;
-      background: #fff8f4;
-      border-color: #edd8cf;
-      color: #8b5a44;
-    }
-
-    .alphabet-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 1.2rem;
-    }
-
-    .symbol-card {
-      background: var(--panel);
-      border-radius: 28px;
-      padding: 1.2rem 0.8rem 1rem;
-      text-align: center;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-      box-shadow:
-        0 2px 6px rgba(0, 0, 0, 0.02),
-        0 1px 2px rgba(0, 0, 0, 0.03);
-      border: 1px solid var(--soft-line);
-      overflow: hidden;
-    }
-
-    .symbol-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 24px -12px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.02);
-      border-color: #dcd2c6;
-      background: #fefefc;
-    }
-
-    .icon-wrapper {
-      font-size: 3.4rem;
-      line-height: 1;
-      margin-bottom: 0.85rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 84px;
-    }
-
-    .icon {
-      display: inline-block;
-      line-height: 1;
-      font-style: normal;
-      font-size: 3.2rem;
-      speak: none;
-      user-select: none;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-rendering: optimizeLegibility;
-    }
-
-    /* Подстраховка для icon-font'ов */
-    [class^="adinkra-"],
-    [class*=" adinkra-"] {
-      display: inline-block;
-      line-height: 1;
-      font-style: normal;
-    }
-
-    [class^="adinkra-"]::before,
-    [class*=" adinkra-"]::before {
-      font-size: inherit;
-      line-height: 1;
-    }
-
-    .symbol-name {
-      font-weight: 520;
-      font-size: 1rem;
-      letter-spacing: -0.2px;
-      color: #2f2c28;
-      margin-bottom: 0.35rem;
-      background: #faf8f4;
-      display: inline-block;
-      padding: 0.12rem 0.55rem;
-      border-radius: 999px;
-    }
-
-    .symbol-meaning {
-      font-size: 0.75rem;
-      color: #857a6b;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-      font-weight: 430;
-      margin-top: 0.25rem;
-      border-top: 1px solid #f0e9e1;
-      padding-top: 0.55rem;
-      display: inline-block;
-      width: 100%;
-    }
-
-    .fallback-mark {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: #f4eee6;
-      color: #9b7c62;
-      font-size: 1.2rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
-
-    .footer-note {
-      margin-top: 3.5rem;
-      text-align: center;
-      font-size: 0.75rem;
-      color: #b1a694;
-      border-top: 1px solid #e9e2d8;
-      padding-top: 1.8rem;
-      letter-spacing: 0.2px;
-    }
-
-    @media (max-width: 580px) {
-      body {
-        padding: 1.1rem;
-      }
-
-      .alphabet-grid {
-        gap: 0.95rem;
-        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      }
-
-      .icon-wrapper {
-        font-size: 2.8rem;
-        min-height: 72px;
-      }
-
-      .icon {
-        font-size: 2.7rem;
-      }
-
-      .symbol-name {
-        font-size: 0.85rem;
-      }
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::-webkit-scrollbar { width: 0; height: 0; }
+    :root { --bg:#f7f5f0; --panel:#fff; --text:#1f1e1c; --muted:#6b6257; --line:#e2ddd4; --soft:#ece6de; --accent:#b26b3b; --soft-accent:#f0ebe3; }
+    body { background:var(--bg); font-family:system-ui,-apple-system,"Inter","Segoe UI",Roboto,Helvetica,sans-serif; padding:2rem 1.5rem; color:var(--text); }
+    .container{ max-width:1280px; margin:0 auto; }
+    .header{ text-align:center; margin-bottom:2rem; border-bottom:1px solid var(--line); padding-bottom:1.25rem; }
+    .header h1{ font-weight:450; font-size:clamp(1.7rem,3vw,2.2rem); letter-spacing:-.3px; color:#2c2a27; margin-bottom:.5rem; }
+    .header h1 span{ font-weight:350; color:var(--accent); background:var(--soft-accent); padding:.1rem .5rem; border-radius:999px; font-size:1.3rem; display:inline-block; vertical-align:middle; }
+    .sub{ color:var(--muted); font-size:.92rem; margin-top:.5rem; max-width:760px; margin-inline:auto; line-height:1.45; }
+    .status{ margin:0 auto 1.25rem auto; max-width:860px; padding:.8rem 1rem; border-radius:16px; background:#fffdf8; border:1px solid #eadfcf; color:#6a5d4b; font-size:.9rem; line-height:1.45; display:none; }
+    .status.ok{ display:block; background:#f8fbf7; border-color:#dfeadf; color:#4c644d; }
+    .status.warn{ display:block; background:#fff8f4; border-color:#edd8cf; color:#8b5a44; }
+    .toolbar{ display:flex; gap:.75rem; justify-content:center; align-items:center; margin:0 auto 1.25rem auto; flex-wrap:wrap; }
+    .toolbar input{ width:min(540px, 100%); border:1px solid #ddd2c6; border-radius:999px; padding:.8rem 1rem; background:#fff; outline:none; font:inherit; }
+    .toolbar input:focus{ border-color:#c9b29d; box-shadow:0 0 0 3px rgba(178,107,59,.12); }
+    .alphabet-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:1.2rem; }
+    .symbol-card{ background:var(--panel); border-radius:28px; padding:1.2rem .8rem 1rem; text-align:center; transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease; box-shadow:0 2px 6px rgba(0,0,0,.02),0 1px 2px rgba(0,0,0,.03); border:1px solid var(--soft); }
+    .symbol-card:hover{ transform:translateY(-4px); box-shadow:0 16px 24px -12px rgba(0,0,0,.08),0 4px 10px rgba(0,0,0,.02); border-color:#dcd2c6; background:#fefefc; }
+    .icon-wrapper{ font-size:3.4rem; line-height:1; margin-bottom:.85rem; display:flex; justify-content:center; align-items:center; min-height:84px; }
+    .adk{ display:inline-block; line-height:1; font-style:normal; font:normal normal normal 1em/1 'adinkraiconfont'; color:inherit; flex-shrink:0; speak:none; text-transform:none; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    .symbol-name{ font-weight:520; font-size:1rem; letter-spacing:-.2px; color:#2f2c28; margin-bottom:.35rem; background:#faf8f4; display:inline-block; padding:.12rem .55rem; border-radius:999px; }
+    .symbol-meaning{ font-size:.75rem; color:#857a6b; text-transform:uppercase; letter-spacing:.3px; font-weight:430; margin-top:.25rem; border-top:1px solid #f0e9e1; padding-top:.55rem; display:inline-block; width:100%; }
+    .footer-note{ margin-top:3.5rem; text-align:center; font-size:.75rem; color:#b1a694; border-top:1px solid #e9e2d8; padding-top:1.8rem; letter-spacing:.2px; }
+    @media (max-width:580px){ body{ padding:1.1rem; } .alphabet-grid{ gap:.95rem; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); } .icon-wrapper{ font-size:2.8rem; min-height:72px; } .symbol-name{ font-size:.85rem; } }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <h1>Adinkra <span>алфавит</span></h1>
-      <div class="sub">✦ символы мудрости, философии и наследия акан ✦</div>
+      <div class="sub">✦ реальный набор иконок из этой папки • класс <code>adk</code> + класс символа из CSS ✦</div>
     </div>
-
     <div id="status" class="status"></div>
+    <div class="toolbar"><input id="search" type="search" placeholder="Поиск по названию или классу…" autocomplete="off" /></div>
     <div id="adinkra-grid" class="alphabet-grid"></div>
-
-    <div class="footer-note">
-      каждый символ — часть культурного кода Западной Африки • знаки в алфавитном порядке названий акан
-    </div>
+    <div class="footer-note">отображаются только те символы, которые реально объявлены в <code>css/icons.css</code></div>
   </div>
-
   <script>
-    (function () {
-      const adinkraSymbols = [
-        { className: "adinkra-adinkrahene", akanName: "Adinkrahene", meaning: "вождь / величие" },
-        { className: "adinkra-akoben", akanName: "Akoben", meaning: "военный рог / бдительность" },
-        { className: "adinkra-akofena", akanName: "Akofena", meaning: "меч войны / мужество" },
-        { className: "adinkra-akokonan", akanName: "Akokonan", meaning: "куриные ноги / забота" },
-        { className: "adinkra-akoma", akanName: "Akoma", meaning: "сердце / терпение" },
-        { className: "adinkra-akooben", akanName: "Akooben", meaning: "рог войны / решимость" },
-        { className: "adinkra-ankra", akanName: "Ankra", meaning: "божественный покой" },
-        { className: "adinkra-bese-saka", akanName: "Bese Saka", meaning: "изобилие" },
-        { className: "adinkra-duafe", akanName: "Duafe", meaning: "женственность" },
-        { className: "adinkra-dwennimmen", akanName: "Dwennimmen", meaning: "смирение + сила" },
-        { className: "adinkra-epa", akanName: "Epa", meaning: "правосудие" },
-        { className: "adinkra-funtunfunefu", akanName: "Funtunfunefu", meaning: "единство" },
-        { className: "adinkra-gye-nyame", akanName: "Gye Nyame", meaning: "всемогущество Бога" },
-        { className: "adinkra-hye-wo-nhye", akanName: "Hye Wo Nhye", meaning: "бессмертие души" },
-        { className: "adinkra-mate-masie", akanName: "Mate Masie", meaning: "мудрость" },
-        { className: "adinkra-nea-ope-se-obeye", akanName: "Nea Ope Se Obeye", meaning: "действие / воля" },
-        { className: "adinkra-nkyinkyim", akanName: "Nkyinkyim", meaning: "инициатива" },
-        { className: "adinkra-nsoromma", akanName: "Nsoromma", meaning: "звезда / руководство" },
-        { className: "adinkra-nyame-nwu-na-mawu", akanName: "Nyame Nwu Na Mawu", meaning: "бессмертие духа" },
-        { className: "adinkra-nyansapo", akanName: "Nyansapo", meaning: "узел мудрости" },
-        { className: "adinkra-okodee-mmowere", akanName: "Okodee Mmowere", meaning: "отвага" },
-        { className: "adinkra-osram-ne-nsoromma", akanName: "Osram Ne Nsoromma", meaning: "любовь и верность" },
-        { className: "adinkra-owuo-atedie", akanName: "Owuo Atedie", meaning: "неизбежность" },
-        { className: "adinkra-sankofa", akanName: "Sankofa", meaning: "уроки предков" },
-        { className: "adinkra-woforo-dua", akanName: "Woforo Dua", meaning: "поддержка" },
-        { className: "adinkra-ako", akanName: "Ako", meaning: "красноречие" },
-        { className: "adinkra-nyame-nwu", akanName: "Nyame Nwu", meaning: "бессмертие Бога" }
-      ];
-
-      const grid = document.getElementById("adinkra-grid");
-      const status = document.getElementById("status");
-
-      function normalizeClassName(value) {
-        return String(value || "")
-          .trim()
-          .replace(/^\.?/, "")
-          .toLowerCase();
-      }
-
-      function levenshtein(a, b) {
-        a = normalizeClassName(a);
-        b = normalizeClassName(b);
-
-        const m = a.length;
-        const n = b.length;
-        const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
-
-        for (let i = 0; i <= m; i++) dp[i][0] = i;
-        for (let j = 0; j <= n; j++) dp[0][j] = j;
-
-        for (let i = 1; i <= m; i++) {
-          for (let j = 1; j <= n; j++) {
-            const cost = a[i - 1] === b[j - 1] ? 0 : 1;
-            dp[i][j] = Math.min(
-              dp[i - 1][j] + 1,
-              dp[i][j - 1] + 1,
-              dp[i - 1][j - 1] + cost
-            );
-          }
-        }
-        return dp[m][n];
-      }
-
-      function collectAdinkraClasses() {
-        const found = new Set();
-
-        for (const sheet of document.styleSheets) {
-          let rules;
-          try {
-            rules = sheet.cssRules || sheet.rules;
-          } catch (err) {
-            continue;
-          }
-          if (!rules) continue;
-
-          for (const rule of rules) {
-            if (!rule.selectorText) continue;
-            const matches = rule.selectorText.match(/\.[a-zA-Z0-9_-]*adinkra-[a-zA-Z0-9_-]+/g);
-            if (!matches) continue;
-
-            for (const m of matches) {
-              found.add(m.slice(1));
-            }
-          }
-        }
-
-        return Array.from(found).sort((a, b) => a.localeCompare(b, "en"));
-      }
-
-      function findBestMatch(target, available) {
-        if (!available.length) return null;
-        const normalizedTarget = normalizeClassName(target);
-
-        if (available.includes(normalizedTarget)) return normalizedTarget;
-
-        let best = null;
-        let bestScore = Infinity;
-
-        for (const candidate of available) {
-          const score = levenshtein(normalizedTarget, candidate);
-          if (score < bestScore) {
-            bestScore = score;
-            best = candidate;
-          }
-        }
-
-        const threshold = Math.max(3, Math.floor(normalizedTarget.length * 0.25));
-        return bestScore <= threshold ? best : null;
-      }
-
-      function setStatus(message, kind) {
-        status.textContent = message;
-        status.className = `status ${kind}`;
-      }
-
-      function createCard({ className, akanName, meaning }, resolvedClassName, isFallback) {
-        const card = document.createElement("div");
-        card.className = "symbol-card";
-
-        const iconWrapper = document.createElement("div");
-        iconWrapper.className = "icon-wrapper";
-
-        let iconEl;
-        if (resolvedClassName && !isFallback) {
-          iconEl = document.createElement("i");
-          iconEl.className = `icon ${resolvedClassName}`;
-          iconEl.setAttribute("aria-label", `Adinkra: ${akanName}`);
-          iconEl.setAttribute("title", `${akanName} — ${resolvedClassName}`);
-        } else {
-          iconEl = document.createElement("span");
-          iconEl.className = "fallback-mark";
-          iconEl.textContent = "A";
-          iconEl.setAttribute("aria-label", `Fallback: ${akanName}`);
-          iconEl.setAttribute("title", `${akanName} — icon not resolved`);
-        }
-
-        iconWrapper.appendChild(iconEl);
-
-        const nameDiv = document.createElement("div");
-        nameDiv.className = "symbol-name";
-        nameDiv.textContent = akanName;
-
-        const meaningDiv = document.createElement("div");
-        meaningDiv.className = "symbol-meaning";
-        meaningDiv.textContent = meaning;
-
-        card.appendChild(iconWrapper);
-        card.appendChild(nameDiv);
-        card.appendChild(meaningDiv);
-
-        if (resolvedClassName && resolvedClassName !== className) {
-          const hint = document.createElement("div");
-          hint.style.marginTop = "0.35rem";
-          hint.style.fontSize = "0.68rem";
-          hint.style.color = "#a88b73";
-          hint.textContent = `class: ${resolvedClassName}`;
-          card.appendChild(hint);
-        }
-
-        if (!resolvedClassName) {
-          const warn = document.createElement("div");
-          warn.style.marginTop = "0.35rem";
-          warn.style.fontSize = "0.68rem";
-          warn.style.color = "#b06a4a";
-          warn.textContent = `нет класса в CSS: ${className}`;
-          card.appendChild(warn);
-        }
-
-        return card;
-      }
-
-      function render() {
-        const availableClasses = collectAdinkraClasses();
-
-        grid.innerHTML = "";
-
-        const unresolved = [];
-        const resolvedCount = [];
-
-        for (const sym of adinkraSymbols) {
-          const exact = availableClasses.includes(normalizeClassName(sym.className));
-          const bestMatch = exact ? normalizeClassName(sym.className) : findBestMatch(sym.className, availableClasses);
-
-          if (bestMatch) {
-            resolvedCount.push(bestMatch);
-            grid.appendChild(createCard(sym, bestMatch, false));
-          } else {
-            unresolved.push(sym.className);
-            grid.appendChild(createCard(sym, null, true));
-          }
-        }
-
-        if (availableClasses.length === 0) {
-          setStatus(
-            "Не удалось прочитать классы Adinkra из icons.css. Проверь путь к CSS и убедись, что файл реально содержит правила вида .adinkra-...::before.",
-            "warn"
-          );
-        } else if (unresolved.length) {
-          setStatus(
-            `CSS найден, но часть имён не совпала: ${unresolved.join(", ")}. Для них показан fallback. Обычно это значит, что в icons.css есть другое имя класса или опечатка в названии.`,
-            "warn"
-          );
-        } else {
-          setStatus(
-            `Готово: найдено ${resolvedCount.length} символов Adinkra из подключённого CSS.`,
-            "ok"
-          );
-        }
-      }
-
-      function waitForStylesAndRender() {
-        const link = Array.from(document.querySelectorAll('link[rel="stylesheet"]'))
-          .find(el => String(el.getAttribute("href") || "").includes("icons.css"));
-
-        if (link) {
-          link.addEventListener("load", render, { once: true });
-          link.addEventListener("error", () => {
-            setStatus("icons.css не загрузился. Проверь путь ./css/icons.css и наличие файла.", "warn");
-            render();
-          }, { once: true });
-        }
-
-        if (document.fonts && document.fonts.ready) {
-          document.fonts.ready.then(render).catch(render);
-        } else {
-          window.addEventListener("load", render, { once: true });
-        }
-
-        // На случай, если stylesheet уже успел загрузиться
-        setTimeout(render, 50);
-      }
-
-      waitForStylesAndRender();
-    })();
+    const SYMBOLS = [
+  {
+    "className": "aban",
+    "label": "Aban",
+    "meaning": "защита / крепость"
+  },
+  {
+    "className": "abe-dua",
+    "label": "Abe Dua",
+    "meaning": "пальма / стойкость"
+  },
+  {
+    "className": "abusua-pa",
+    "label": "Abusua Pa",
+    "meaning": "хороший род"
+  },
+  {
+    "className": "adinkrahene",
+    "label": "Adinkrahene",
+    "meaning": "величие / лидерство"
+  },
+  {
+    "className": "adwo",
+    "label": "Adwo",
+    "meaning": "спокойствие"
+  },
+  {
+    "className": "agyindawuru",
+    "label": "Agyindawuru",
+    "meaning": "колокол уважения"
+  },
+  {
+    "className": "akoben",
+    "label": "Akoben",
+    "meaning": "военный рог / бдительность"
+  },
+  {
+    "className": "akofena",
+    "label": "Akofena",
+    "meaning": "меч войны / мужество"
+  },
+  {
+    "className": "akoko-nan",
+    "label": "Akoko Nan",
+    "meaning": "куриная лапа / забота"
+  },
+  {
+    "className": "akoma",
+    "label": "Akoma",
+    "meaning": "сердце / терпение"
+  },
+  {
+    "className": "akoma-ntoso",
+    "label": "Akoma Ntoso",
+    "meaning": "сердца, связанные вместе"
+  },
+  {
+    "className": "ananse-ntontan",
+    "label": "Ananse Ntontan",
+    "meaning": "паутинная сеть / мудрость"
+  },
+  {
+    "className": "ani-bere-enso-gya",
+    "label": "Ani Bere Enso Gya",
+    "meaning": "терпение"
+  },
+  {
+    "className": "anyi-me-aye-a",
+    "label": "Anyi Me Aye A",
+    "meaning": "не завидую"
+  },
+  {
+    "className": "asaawa",
+    "label": "Asaawa",
+    "meaning": "прямота / честность"
+  },
+  {
+    "className": "asase-ye-duru",
+    "label": "Asase Ye Duru",
+    "meaning": "земля имеет вес"
+  },
+  {
+    "className": "asetena-pa",
+    "label": "Asetena Pa",
+    "meaning": "хорошая жизнь"
+  },
+  {
+    "className": "awurade-baatanfo",
+    "label": "Awurade Baatanfo",
+    "meaning": "божественное материнство"
+  },
+  {
+    "className": "aya",
+    "label": "Aya",
+    "meaning": "папоротник / стойкость"
+  },
+  {
+    "className": "bese-saka",
+    "label": "Bese Saka",
+    "meaning": "мешок с орехами кола / изобилие"
+  },
+  {
+    "className": "bi-nka-bi",
+    "label": "Bi Nka Bi",
+    "meaning": "никого не задевай"
+  },
+  {
+    "className": "boa-me-na-me-mmoa-wo",
+    "label": "Boa Me Na Me Mmoa Wo",
+    "meaning": "помоги мне и я помогу тебе"
+  },
+  {
+    "className": "boafo-ye-na",
+    "label": "Boafo Ye Na",
+    "meaning": "помощник"
+  },
+  {
+    "className": "dame-dame",
+    "label": "Dame Dame",
+    "meaning": "игра / стратегия"
+  },
+  {
+    "className": "denkyem",
+    "label": "Denkyem",
+    "meaning": "крокодил / приспособляемость"
+  },
+  {
+    "className": "dono",
+    "label": "Dono",
+    "meaning": "барабан"
+  },
+  {
+    "className": "dono-ntoaso",
+    "label": "Dono Ntoaso",
+    "meaning": "барабан и связь"
+  },
+  {
+    "className": "duafe",
+    "label": "Duafe",
+    "meaning": "гребень / красота"
+  },
+  {
+    "className": "dwennimmen",
+    "label": "Dwennimmen",
+    "meaning": "овеньи рога / смирение и сила"
+  },
+  {
+    "className": "eban",
+    "label": "Eban",
+    "meaning": "ограда / безопасность"
+  },
+  {
+    "className": "epa",
+    "label": "Epa",
+    "meaning": "закон / справедливость"
+  },
+  {
+    "className": "ese-ne-tekrema",
+    "label": "Ese Ne Tekrema",
+    "meaning": "зуб и язык"
+  },
+  {
+    "className": "esono-anantam",
+    "label": "Esono Anantam",
+    "meaning": "слон идёт"
+  },
+  {
+    "className": "fafanto",
+    "label": "Fafanto",
+    "meaning": "бабочка"
+  },
+  {
+    "className": "fawohodie",
+    "label": "Fawohodie",
+    "meaning": "свобода"
+  },
+  {
+    "className": "fihankra",
+    "label": "Fihankra",
+    "meaning": "дом / защита"
+  },
+  {
+    "className": "fofo",
+    "label": "Fofo",
+    "meaning": "цветок"
+  },
+  {
+    "className": "funtunfunefu-denkyemfunefu",
+    "label": "Funtunfunefu Denkyemfunefu",
+    "meaning": "единство"
+  },
+  {
+    "className": "gye-nyame",
+    "label": "Gye Nyame",
+    "meaning": "божественное верховенство"
+  },
+  {
+    "className": "gye-wani",
+    "label": "Gye Wani",
+    "meaning": "будь бдителен"
+  },
+  {
+    "className": "hwe-mu-dua",
+    "label": "Hwe Mu Dua",
+    "meaning": "измерительная линейка"
+  },
+  {
+    "className": "hye-won-hye",
+    "label": "Hye Won Hye",
+    "meaning": "невыгораемость / стойкость"
+  },
+  {
+    "className": "kete-pa",
+    "label": "Kete Pa",
+    "meaning": "хорошее полотно"
+  },
+  {
+    "className": "kintinkantan",
+    "label": "Kintinkantan",
+    "meaning": "величие / самоуверенность"
+  },
+  {
+    "className": "kokuromotie",
+    "label": "Kokuromotie",
+    "meaning": "красноречие"
+  },
+  {
+    "className": "kramo-bone-amma-yeanhu-kramo-pa",
+    "label": "Kramo Bone Amma Yeanhu Kramo Pa",
+    "meaning": "не суди по плохому"
+  },
+  {
+    "className": "kuronti-ne-akwamu",
+    "label": "Kuronti Ne Akwamu",
+    "meaning": "союз"
+  },
+  {
+    "className": "kwatakye-atiko",
+    "label": "Kwatakye Atiko",
+    "meaning": "воинская храбрость"
+  },
+  {
+    "className": "kyemfere",
+    "label": "Kyemfere",
+    "meaning": "палитра / красота"
+  },
+  {
+    "className": "mako",
+    "label": "Mako",
+    "meaning": "перец / острота"
+  },
+  {
+    "className": "mate-masie",
+    "label": "Mate Masie",
+    "meaning": "я слышал и сохранил"
+  },
+  {
+    "className": "me-ware-wo",
+    "label": "Me Ware Wo",
+    "meaning": "я женюсь на тебе"
+  },
+  {
+    "className": "mekyia-wo",
+    "label": "Mekyia Wo",
+    "meaning": "я приветствую тебя"
+  },
+  {
+    "className": "menso-wo-kenten",
+    "label": "Menso Wo Kenten",
+    "meaning": "я не ношу твой корзину"
+  },
+  {
+    "className": "mframadan",
+    "label": "Mframadan",
+    "meaning": "дом ветров"
+  },
+  {
+    "className": "mmere-dane",
+    "label": "Mmere Dane",
+    "meaning": "время меняется"
+  },
+  {
+    "className": "mmusuyidee",
+    "label": "Mmusuyidee",
+    "meaning": "благословение"
+  },
+  {
+    "className": "mo-no-yo",
+    "label": "Mo No Yo",
+    "meaning": "добро для всех"
+  },
+  {
+    "className": "mpatapo",
+    "label": "Mpatapo",
+    "meaning": "узел примирения"
+  },
+  {
+    "className": "mpuannum",
+    "label": "Mpuannum",
+    "meaning": "пять пучков волос"
+  },
+  {
+    "className": "mrammuo",
+    "label": "Mrammuo",
+    "meaning": "наказ / дисциплина"
+  },
+  {
+    "className": "nante-yie",
+    "label": "Nante Yie",
+    "meaning": "иди хорошо"
+  },
+  {
+    "className": "nea-onnim",
+    "label": "Nea Onnim",
+    "meaning": "невежество"
+  },
+  {
+    "className": "nea-ope-se-obedi-hene",
+    "label": "Nea Ope Se Obedi Hene",
+    "meaning": "тот, кто желает быть королём"
+  },
+  {
+    "className": "nkonsonkonson",
+    "label": "Nkonsonkonson",
+    "meaning": "связи / цепь"
+  },
+  {
+    "className": "nkotimsefo-mpua",
+    "label": "Nkotimsefo Mpua",
+    "meaning": "щетина антилопы"
+  },
+  {
+    "className": "nkrabea",
+    "label": "Nkrabea",
+    "meaning": "судьба"
+  },
+  {
+    "className": "nkyimu",
+    "label": "Nkyimu",
+    "meaning": "разделение / линии"
+  },
+  {
+    "className": "nkyinkyim",
+    "label": "Nkyinkyim",
+    "meaning": "инициатива / изобретательность"
+  },
+  {
+    "className": "nnampo-pa-baanu",
+    "label": "Nnampo Pa Baanu",
+    "meaning": "две хорошие пары"
+  },
+  {
+    "className": "nokore",
+    "label": "Nokore",
+    "meaning": "истина"
+  },
+  {
+    "className": "nsaa",
+    "label": "Nsaa",
+    "meaning": "качество / мастерство"
+  },
+  {
+    "className": "nserewa",
+    "label": "Nserewa",
+    "meaning": "раковина каури"
+  },
+  {
+    "className": "nsoromma",
+    "label": "Nsoromma",
+    "meaning": "звезда / божественная опека"
+  },
+  {
+    "className": "nteasee",
+    "label": "Nteasee",
+    "meaning": "согласие"
+  },
+  {
+    "className": "nya-gyidie",
+    "label": "Nya Gyidie",
+    "meaning": "вера"
+  },
+  {
+    "className": "nyame-biribi-wo-soro",
+    "label": "Nyame Biribi Wo Soro",
+    "meaning": "у Бога есть нечто на небе"
+  },
+  {
+    "className": "nyame-dua",
+    "label": "Nyame Dua",
+    "meaning": "алтарь Бога"
+  },
+  {
+    "className": "nyame-nnwu-na-mawu",
+    "label": "Nyame Nnwu Na Mawu",
+    "meaning": "Бог не умирает, я не умру"
+  },
+  {
+    "className": "nyame-nti",
+    "label": "Nyame Nti",
+    "meaning": "ради Бога"
+  },
+  {
+    "className": "nyame-ye-ohene",
+    "label": "Nyame Ye Ohene",
+    "meaning": "Бог есть царь"
+  },
+  {
+    "className": "nyansapo",
+    "label": "Nyansapo",
+    "meaning": "узел мудрости"
+  },
+  {
+    "className": "obohemmaa",
+    "label": "Obohemmaa",
+    "meaning": "королева-мать"
+  },
+  {
+    "className": "odo-nyera-fie-kwan",
+    "label": "Odo Nyera Fie Kwan",
+    "meaning": "любовь не теряет дорогу домой"
+  },
+  {
+    "className": "okodee-mmowere",
+    "label": "Okodee Mmowere",
+    "meaning": "когти орла / отвага"
+  },
+  {
+    "className": "okuafo-pa",
+    "label": "Okuafo Pa",
+    "meaning": "хороший фермер"
+  },
+  {
+    "className": "onyankopon-adom-nti-biribiara-beye-yie",
+    "label": "Onyankopon Adom Nti Biribiara Beye Yie",
+    "meaning": "по благодати Бога всё будет хорошо"
+  },
+  {
+    "className": "osram-ne-nsoromma",
+    "label": "Osram Ne Nsoromma",
+    "meaning": "луна и звезда"
+  },
+  {
+    "className": "owo-foro-adobe",
+    "label": "Owo Foro Adobe",
+    "meaning": "змея и ступень"
+  },
+  {
+    "className": "owuo-atwedee",
+    "label": "Owuo Atwedee",
+    "meaning": "лестница смерти"
+  },
+  {
+    "className": "pempamsie",
+    "label": "Pempamsie",
+    "meaning": "будь готов / колючки"
+  },
+  {
+    "className": "sankofa-one",
+    "label": "Sankofa",
+    "meaning": "возвращение к истокам"
+  },
+  {
+    "className": "sankofa-two",
+    "label": "Sankofa",
+    "meaning": "возвращение к истокам"
+  },
+  {
+    "className": "sepow",
+    "label": "Sepow",
+    "meaning": "меч"
+  },
+  {
+    "className": "sesa-wo-suban",
+    "label": "Sesa Wo Suban",
+    "meaning": "измени свой характер"
+  },
+  {
+    "className": "som-onyankopon",
+    "label": "Som Onyankopon",
+    "meaning": "служи Богу"
+  },
+  {
+    "className": "sunsum",
+    "label": "Sunsum",
+    "meaning": "дух"
+  },
+  {
+    "className": "tabono",
+    "label": "Tabono",
+    "meaning": "весло / упорство"
+  },
+  {
+    "className": "tamfo-bebre",
+    "label": "Tamfo Bebre",
+    "meaning": "враг страдает"
+  },
+  {
+    "className": "uac-nkanea",
+    "label": "UAC Nkanea",
+    "meaning": "лампа"
+  },
+  {
+    "className": "wawa-aba",
+    "label": "Wawa Aba",
+    "meaning": "семя дерева вава / стойкость"
+  },
+  {
+    "className": "wo-nsa-da-mu",
+    "label": "Wo Nsa Da Mu",
+    "meaning": "твои руки внутри"
+  },
+  {
+    "className": "woforo-dua-pa",
+    "label": "Woforo Dua Pa",
+    "meaning": "если лезешь на хорошее дерево"
+  }
+];
+    const grid = document.getElementById('adinkra-grid');
+    const status = document.getElementById('status');
+    const search = document.getElementById('search');
+    function setStatus(text, kind='ok') { status.textContent = text; status.className = 'status ' + kind; status.style.display = 'block'; }
+    function createCard(item) {
+      const card = document.createElement('div');
+      card.className = 'symbol-card';
+      card.dataset.label = item.label.toLowerCase();
+      card.dataset.className = item.className.toLowerCase();
+      const iconWrapper = document.createElement('div');
+      iconWrapper.className = 'icon-wrapper';
+      const icon = document.createElement('i');
+      icon.className = `adk adk-${item.className}`;
+      icon.setAttribute('aria-label', item.label);
+      icon.setAttribute('title', `${item.label} · ${item.className}`);
+      iconWrapper.appendChild(icon);
+      const nameDiv = document.createElement('div');
+      nameDiv.className = 'symbol-name';
+      nameDiv.textContent = item.label;
+      const meaningDiv = document.createElement('div');
+      meaningDiv.className = 'symbol-meaning';
+      meaningDiv.textContent = item.meaning;
+      card.appendChild(iconWrapper); card.appendChild(nameDiv); card.appendChild(meaningDiv);
+      return card;
+    }
+    function render(list) { grid.innerHTML = ''; for (const item of list) grid.appendChild(createCard(item)); setStatus(`Найдено ${list.length} символов из CSS.`, 'ok'); }
+    function applyFilter() { const q = search.value.trim().toLowerCase(); const cards = grid.querySelectorAll('.symbol-card'); let visible = 0; cards.forEach(card => { const match = !q || card.dataset.label.includes(q) || card.dataset.className.includes(q); card.style.display = match ? '' : 'none'; if (match) visible++; }); setStatus(q ? `Показано ${visible} символов по запросу “${q}”.` : `Найдено ${cards.length} символов из CSS.`, q ? 'warn' : 'ok'); }
+    function init() { const sorted = [...SYMBOLS].sort((a,b) => a.label.localeCompare(b.label, 'ru')); render(sorted); search.addEventListener('input', applyFilter); }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true }); else init();
   </script>
 </body>
 </html>
