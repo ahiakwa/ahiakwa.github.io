@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Библиотека семантических операторов культуры</title>
+  <meta name="description" content="Полная систематизация иконок Adinkra: 103 символа, сгруппированные по смысловым полям. Тёмная и светлая темы, золотой режим, модальное описание." />
+  <link rel="preconnect" href="https://ahiakwa.github.io" />
+  <link rel="stylesheet" href="https://ahiakwa.github.io/assets/adinkra-icons/css/icons.min.css" />
+  <style>
+    :root {
+      --bg: #f6f3ee;
+      --bg-elev: rgba(255,255,255,.72);
+      --panel: rgba(255,255,255,.86);
+      --panel-strong: rgba(255,255,255,.96);
+      --text: #1d1b19;
+      --muted: #675f56;
+      --line: rgba(97,84,66,.14);
+      --line-strong: rgba(97,84,66,.24);
+      --shadow: 0 10px 30px rgba(24, 18, 11, .08);
+      --shadow-soft: 0 6px 18px rgba(24, 18, 11, .05);
+      --gold: #c8a13a;
+      --gold-deep: #a97c16;
+      --icon: #2a241d;
+      --icon-gold: #c9a441;
+      --accent: #b8843c;
+      --chip: rgba(184,132,60,.08);
+      --chip-active: rgba(184,132,60,.16);
+      --overlay: rgba(16, 13, 10, .58);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+    }
+
+    html {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+    html::-webkit-scrollbar { width: 0; height: 0; display: none; }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(200,161,58,.10), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(184,132,60,.08), transparent 26%),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-y: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    body::-webkit-scrollbar { width: 0; height: 0; display: none; }
+
+    [data-theme="dark"] {
+      --bg: #0f1114;
+      --bg-elev: rgba(21,24,29,.7);
+      --panel: rgba(21,24,29,.78);
+      --panel-strong: rgba(28,32,38,.96);
+      --text: #f1ece3;
+      --muted: #b3a999;
+      --line: rgba(255,255,255,.10);
+      --line-strong: rgba(255,255,255,.16);
+      --shadow: 0 18px 40px rgba(0,0,0,.36);
+      --shadow-soft: 0 10px 24px rgba(0,0,0,.24);
+      --chip: rgba(255,255,255,.05);
+      --chip-active: rgba(200,161,58,.18);
+      --overlay: rgba(2, 3, 5, .72);
+      --icon: #ece5d8;
+    }
+
+    [data-gold="true"] {
+      --icon: var(--icon-gold);
+    }
+
+    .page {
+      width: min(1500px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 22px 0 40px;
+    }
+
+    .hero {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, rgba(255,255,255,.72), rgba(255,255,255,.42));
+      border: 1px solid var(--line);
+      border-radius: calc(var(--radius-xl) + 4px);
+      box-shadow: var(--shadow-soft);
+      overflow: clip;
+    }
+    [data-theme="dark"] .hero {
+      background: linear-gradient(to bottom, rgba(15,17,20,.82), rgba(15,17,20,.54));
+    }
+
+    .hero-inner {
+      padding: 22px 22px 18px;
+    }
+
+    .title-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: clamp(1.55rem, 2.7vw, 2.55rem);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      font-weight: 760;
+    }
+
+    .brand .subtitle {
+      margin-top: 10px;
+      max-width: 860px;
+      color: var(--muted);
+      font-size: .98rem;
+      line-height: 1.55;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--chip);
+      color: var(--muted);
+      font-size: .86rem;
+      letter-spacing: .01em;
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1.2fr auto auto;
+      gap: 12px;
+      margin-top: 18px;
+      align-items: center;
+    }
+
+    .search {
+      position: relative;
+      min-width: 0;
+    }
+    .search input {
+      width: 100%;
+      padding: 14px 16px 14px 44px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: var(--panel-strong);
+      color: var(--text);
+      outline: none;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+      transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+      font-size: 0.96rem;
+    }
+    .search input:focus {
+      border-color: rgba(200,161,58,.56);
+      box-shadow: 0 0 0 4px rgba(200,161,58,.12);
+    }
+    .search svg {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      opacity: .62;
+      pointer-events: none;
+    }
+
+    .toggle-group {
+      display: inline-flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--text);
+      cursor: pointer;
+      user-select: none;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
+      box-shadow: var(--shadow-soft);
+      font-size: .9rem;
+      font-weight: 640;
+      letter-spacing: .01em;
+    }
+    .toggle:hover { transform: translateY(-1px); border-color: rgba(200,161,58,.48); }
+    .toggle.active {
+      border-color: rgba(200,161,58,.72);
+      background: var(--panel-strong);
+      box-shadow: 0 0 0 4px rgba(200,161,58,.12);
+    }
+
+    .section-nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .nav-chip {
+      border: 1px solid var(--line);
+      background: var(--chip);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 9px 12px;
+      cursor: pointer;
+      font-size: .84rem;
+      font-weight: 620;
+      transition: background .18s ease, transform .18s ease, border-color .18s ease, color .18s ease;
+    }
+    .nav-chip:hover {
+      transform: translateY(-1px);
+      border-color: rgba(200,161,58,.48);
+      color: var(--text);
+    }
+
+    .stats {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin: 18px 2px 8px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .content {
+      margin-top: 18px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .group {
+      border: 1px solid var(--line);
+      background: var(--bg-elev);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      overflow: clip;
+    }
+
+    .group-head {
+      padding: 18px 18px 12px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(to bottom, rgba(255,255,255,.06), transparent);
+    }
+
+    .group-title {
+      margin: 0;
+      font-size: 1.08rem;
+      letter-spacing: -.02em;
+      font-weight: 760;
+    }
+
+    .group-desc {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: .94rem;
+      line-height: 1.5;
+      max-width: 980px;
+    }
+
+    .group-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 12px;
+      padding: 14px;
+    }
+
+    .card {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 22px;
+      padding: 14px 12px 12px;
+      text-align: center;
+      color: inherit;
+      cursor: pointer;
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease, background .18s ease;
+      box-shadow: var(--shadow-soft);
+      min-height: 170px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(200,161,58,.52);
+      box-shadow: var(--shadow);
+      background: var(--panel-strong);
+    }
+
+    .icon-wrap {
+      min-height: 76px;
+      display: grid;
+      place-items: center;
+      font-size: 3.25rem;
+      line-height: 1;
+      color: var(--icon);
+    }
+
+    .icon-wrap i {
+      font-size: 3.3rem;
+      line-height: 1;
+      font-style: normal;
+      color: var(--icon);
+      display: inline-block;
+    }
+
+    .card-name {
+      font-weight: 760;
+      font-size: .98rem;
+      letter-spacing: -.02em;
+      line-height: 1.18;
+    }
+
+    .card-meta {
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:6px;
+      align-items:center;
+      min-height: 34px;
+    }
+
+    .pill {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 6px 8px;
+      border-radius: 999px;
+      background: var(--chip);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .72rem;
+      line-height: 1;
+    }
+
+    .pill.gold {
+      color: var(--gold-deep);
+      border-color: rgba(200,161,58,.26);
+      background: rgba(200,161,58,.11);
+    }
+
+    .card-read {
+      color: var(--muted);
+      font-size: .76rem;
+      line-height: 1.35;
+      min-height: 34px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .empty {
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      color: var(--muted);
+      background: var(--bg-elev);
+      text-align: center;
+    }
+
+    .footer-note {
+      padding: 18px 2px 0;
+      color: var(--muted);
+      font-size: .83rem;
+      line-height: 1.55;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: var(--overlay);
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .2s ease, visibility .2s ease;
+    }
+
+    .modal.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-panel {
+      width: min(980px, 100%);
+      max-height: min(84vh, 900px);
+      overflow: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      background: var(--panel-strong);
+      color: var(--text);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      box-shadow: 0 28px 80px rgba(0,0,0,.28);
+      transform: translateY(10px) scale(.985);
+      transition: transform .2s ease;
+    }
+    .modal.open .modal-panel {
+      transform: translateY(0) scale(1);
+    }
+    .modal-panel::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+      display: none;
+    }
+
+    .modal-top {
+      display:flex;
+      justify-content:space-between;
+      gap: 12px;
+      align-items:flex-start;
+      padding: 22px 22px 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .modal-title {
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:0;
+    }
+
+    .modal-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 22px;
+      display:grid;
+      place-items:center;
+      background: var(--chip);
+      border: 1px solid var(--line);
+      color: var(--icon);
+      flex: 0 0 auto;
+    }
+    .modal-icon i {
+      font-size: 2.4rem;
+      line-height: 1;
+      font-style: normal;
+      color: var(--icon);
+    }
+
+    .modal-title h2 {
+      margin:0;
+      font-size: clamp(1.2rem, 2vw, 1.8rem);
+      line-height: 1.15;
+      letter-spacing: -.03em;
+    }
+    .modal-title .subline {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: .94rem;
+    }
+
+    .close-btn {
+      border: 1px solid var(--line);
+      background: var(--chip);
+      color: var(--text);
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      cursor:pointer;
+      font-size: 1.15rem;
+      line-height: 1;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .close-btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(200,161,58,.5);
+    }
+
+    .modal-body {
+      padding: 18px 22px 22px;
+      display:grid;
+      gap: 18px;
+    }
+
+    .detail-grid {
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 12px;
+    }
+
+    .detail {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 14px 14px 12px;
+      background: var(--bg-elev);
+    }
+    .detail .k {
+      color: var(--muted);
+      font-size: .76rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      margin-bottom: 6px;
+    }
+    .detail .v {
+      font-size: .96rem;
+      line-height: 1.45;
+    }
+
+    .explain {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 16px;
+      background: var(--bg-elev);
+      line-height: 1.7;
+      color: var(--text);
+      font-size: .98rem;
+    }
+
+    .codebox {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      overflow: clip;
+      background: #151515;
+      color: #f1efe8;
+      box-shadow: var(--shadow-soft);
+    }
+    .codebox .head {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding: 12px 14px;
+      background: rgba(255,255,255,.04);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      font-size: .84rem;
+      color: rgba(255,255,255,.7);
+    }
+    .copy-btn {
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: #fff;
+      border-radius: 999px;
+      padding: 8px 12px;
+      cursor:pointer;
+      font-size:.82rem;
+    }
+    pre {
+      margin: 0;
+      padding: 16px;
+      overflow: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      background: transparent;
+      line-height: 1.6;
+      font-size: .88rem;
+    }
+    pre::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+      display: none;
+    }
+
+    .marker {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    @media (max-width: 980px) {
+      .toolbar {
+        grid-template-columns: 1fr;
+      }
+      .toggle-group {
+        justify-content: flex-start;
+      }
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+      .group-grid {
+        grid-template-columns: repeat(auto-fill, minmax(136px, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        width: min(100vw - 14px, 100vw);
+        padding-top: 8px;
+        padding-bottom: 22px;
+      }
+      .hero-inner {
+        padding: 16px 14px 14px;
+      }
+      .group-head, .group-grid, .modal-top, .modal-body {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+      .group-grid {
+        padding-top: 10px;
+      }
+      .card {
+        min-height: 160px;
+      }
+      .modal-panel {
+        max-height: 90vh;
+        border-radius: 24px;
+      }
+      .modal-top {
+        flex-direction: column;
+      }
+      .close-btn {
+        align-self: flex-end;
+      }
+    }
+  </style>
+</head>
+<body data-theme="light" data-gold="false">
+  <div class="page">
+    <header class="hero">
+      <div class="hero-inner">
+        <div class="title-row">
+          <div class="brand">
+            <h1>Библиотека семантических операторов культуры</h1>
+            <div class="subtitle">
+            </div>
+            <div class="badge">Источник: <code>icons.min.css</code> · класс-обёртка <code>.adk</code> обязателен</div>
+          </div>
+
+          <div class="toggle-group" aria-label="Переключатели">
+            <button class="toggle" id="themeLight" type="button">Светлая</button>
+            <button class="toggle" id="themeDark" type="button">Тёмная</button>
+            <button class="toggle" id="goldToggle" type="button">Золотой режим</button>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <label class="search" aria-label="Поиск символа">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M21 21l-4.2-4.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            <input id="searchInput" type="search" placeholder="Поиск по имени, классу, группе или описанию" />
+          </label>
+
+          <button class="toggle" id="expandAll" type="button">Свернуть/развернуть</button>
+          <button class="toggle" id="copyAll" type="button">Скопировать шаблон</button>
+        </div>
+
+        <div class="section-nav" id="sectionNav"></div>
+        <div class="stats" id="stats"></div>
+      </div>
+    </header>
+
+    <main class="content" id="content"></main>
+    <div class="empty hidden" id="emptyState">Ничего не найдено по текущему фильтру.</div>
+
+    <div class="footer-note">
+      Подсказка: нажми на любой символ, чтобы открыть подробное описание. Можно переключать светлую и тёмную темы, а также включать золотой цвет символов, характерный для ганийской визуальной традиции.
+    </div>
+  </div>
+
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalName">
+      <div class="modal-top">
+        <div class="modal-title">
+          <div class="modal-icon" id="modalIcon"></div>
+          <div style="min-width:0">
+            <h2 id="modalName"></h2>
+            <div class="subline" id="modalSlug"></div>
+          </div>
+        </div>
+        <button class="close-btn" id="closeModal" type="button" aria-label="Закрыть">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="detail-grid">
+          <div class="detail">
+            <div class="k">Смысловое поле</div>
+            <div class="v" id="modalGroup"></div>
+          </div>
+          <div class="detail">
+            <div class="k">Класс CSS</div>
+            <div class="v" id="modalClass"></div>
+          </div>
+        </div>
+
+        <div class="explain" id="modalReading"></div>
+
+        <div class="codebox">
+          <div class="head">
+            <span>Минимальный шаблон подключения</span>
+            <button class="copy-btn" id="copySnippet" type="button">Копировать</button>
+          </div>
+          <pre id="snippet"></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const GROUPS = {"Божественное и сакральное": {"desc": "Символы этой группы связывают порядок мира, имя Бога, судьбу, духовное присутствие и благословение.", "accent": "var(--gold)"}, "Мудрость и знание": {"desc": "Символы наблюдения, обучения, различения, памяти, ремесленного мастерства и внутренней собранности.", "accent": "var(--gold)"}, "Единство и отношения": {"desc": "Символы родства, взаимности, примирения, сотрудничества и социальной ткани сообщества.", "accent": "var(--gold)"}, "Смелость и власть": {"desc": "Символы лидерства, воинской готовности, личной силы, достоинства и защитной позиции.", "accent": "var(--gold)"}, "Труд и изобилие": {"desc": "Символы работы, урожая, богатства, качества, устойчивого достатка и плодов усилий.", "accent": "var(--gold)"}, "Дом и защита": {"desc": "Символы дома, укрытия, границ, безопасности и внутренней устойчивости.", "accent": "var(--gold)"}, "Движение и изменение": {"desc": "Символы пути, поворота, адаптации, перехода, течения времени и преобразования.", "accent": "var(--gold)"}, "Искусство и коммуникация": {"desc": "Символы музыки, ритма, речи, образа, знака и выразительной формы.", "accent": "var(--gold)"}, "Этика и порядок": {"desc": "Символы правды, меры, дисциплины, справедливости, сдержанности и социального баланса.", "accent": "var(--gold)"}, "История и идентичность": {"desc": "Символы происхождения, памяти, наследия, коллективной идентичности и локальной истории.", "accent": "var(--gold)"}};
+    const SYMBOLS = [{"slug": "aban", "name": "Aban", "group": "Дом и защита", "reading": "Укрытие, границы, опора и защита формы. Символы дома, укрытия, границ, безопасности и внутренней устойчивости.", "variant": ""}, {"slug": "abe-dua", "name": "Abe Dua", "group": "Труд и изобилие", "reading": "Труд, плод, ресурс и устойчивый достаток. Символы работы, урожая, богатства, качества, устойчивого достатка и плодов усилий.", "variant": ""}, {"slug": "abusua-pa", "name": "Abusua Pa", "group": "Единство и отношения", "reading": "Символы родства, взаимности, примирения, сотрудничества и социальной ткани сообщества.", "variant": ""}, {"slug": "adinkrahene", "name": "Adinkrahene", "group": "Божественное и сакральное", "reading": "“Глава символов”: знак первенства, авторитета и композиционного центра системы. Символы этой группы связывают порядок мира, имя Бога, судьбу, духовное присутствие и благословение.", "variant": ""}, {"slug": "adwo", "name": "Adwo", "group": "Мудрость и знание", "reading": "Символы наблюдения, обучения, различения, памяти, ремесленного мастерства и внутренней собранности.", "variant": ""}, {"slug": "agyindawuru", "name": "Agyindawuru", "group": "Мудрость и знание", "reading": "Коммуникация, ритм, знак и выразительная форма. Символы наблюдения, обучения, различения, памяти, ремесленного мастерства и внутренней собранности.", "variant": ""}, {"slug": "akoben", "name": "Akoben", "group": "Смелость и власть", "reading": "Боевой рог: внимание, готовность и дисциплинированная бдительность. Символы лидерства, воинской готовности, личной силы, достоинства и защитной позиции.", "variant": ""}, {"slug": "akofena", "name": "Akofena", "group": "Смелость и власть", "reading": "Меч как образ решительности, ответственности и силы, поставленной под контроль. Символы лидерства, воинской готовности, личной силы, достоинства и защитной позиции.", "variant": ""}, {"slug": "akoko-nan", "name": "Akoko Nan", "group": "Единство и отношения", "reading": "Символы родства, взаимности, примирения, сотрудничества и социальной ткани сообщества.", "variant": ""}, {"slug": "akoma-ntoso", "name": "Akoma Ntoso", "group": "Единство и отношения", "reading": "“Соединённые сердца”: согласие, доверие и взаимная поддержка. Символы родства, взаимности, примирения, сотрудничества и социальной ткани сообщества.", "variant": ""}, {"slug": "akoma", "name": "Akoma", "group": "Единство и отношения", "reading": "Сердце как дисциплина чувства: терпение, мягкость и эмоциональная устойчивость. Символы родства, взаимности, примирения, сотрудничества и социальной ткани сообщества.", "variant": ""}, {"slug": "ananse-ntontan", "name": "Ananse Ntontan", "group": "Единство и отношения", "reading": "Паутинная сеть Анансе: стратегия, интеллект и связанная история. Символы родства, взаимности, примирения, сотрудничества и социальной ткани сообщества.", "variant": ""}, {"slug": "ani-bere-enso-gya", "name": "Ani Bere Enso Gya", "group": "Мудрость и знание", "reading": "Символы наблюдения, обучения, различения, памяти, ремесленного мастерства и внутренней собранности.", "variant": ""}, {"slug": "anyi-me-aye-a", "name": "Anyi Me Aye A", "group": "Мудрость и знание", "reading": "Символы наблюдения, обучения, различения, памяти, ремесленного мастерства и внутренней собранности.", "variant": ""}, {"slug": "asaawa", "name": "Asaawa", "group": "Труд и изобилие", "reading": "Труд, плод, ресурс и устойчивый достаток. Символы работы, урожая, богатства, качества, устойчивого достатка и плодов усилий.", "variant": ""}, {"slug": "asase-ye-duru", "name": "Asase Ye Duru", "group": "Божественное и сакральное", "reading": "Земля имеет вес: уважение к почве, реальности и материальному основанию. Символы этой группы связывают порядок мира, имя Бога, судьбу, духовное присутствие и благословение.", "variant": ""}, {"slug": "asetena-pa", "name": "Asetena Pa", "group": "Этика и порядок", "reading": "Символы правды, меры, дисциплины, справедливости, сдержанности и социального баланса.", "variant": ""}, {"slug": "awurade-baatanfo", "name": "Awurade Baatanfo", "group": "Божественное и сакральное", "reading": "Символы этой группы связывают порядок мира, имя Бога, судьбу, духовное присутствие и благословение.", "variant": ""}, {"slug": "aya", "name": "Aya", "group": "Движение и изменение", "reading": "Папоротник: выносливость, жизненная стойкость и способность расти в трудной среде. Символы пути, поворота, адаптации, перехода, течения времени и преобразования.", "variant": ""}, {"slug": "bese-saka", "name": "Bese Saka", "group": "Труд и изобилие", "reading": "Пакет колы: достаток, плодородие и собранный материальный ресурс. Символы работы, урожая, богатства, качества, устойчивого достатка и плодов усилий.", "variant": ""}, {"slug": "bi-nka-bi", "name": "Bi Nka Bi", "group": "Единство и отношения", "reading": "Принцип ненападения и самоконтроля: не причиняй вреда без причины. Символы родства, взаимности, примирения, сотрудничества и социальной ткани сообщества.", "variant": ""}, {"slug": "boa-me-na-me-mmoa-wo", "name": "Boa Me Na Me Mmoa Wo", "group": "Единство и отношения", "reading": "Связь, согласование, примирение и социальный баланс. Символы родства, взаимности, примирения, сотрудничества и социальной ткани сообщества.", "variant": ""}, {"slug": "boafo-ye-na", "name": "Boafo Ye Na", "group": "Единство и отношения", "reading": "Символы родства, взаимности, примирения, сотрудничества и социальной ткани сообщества.", "variant": ""}, {"slug": "dame-dame", "name": "Dame Dame", "group": "Мудрость и знание", "reading": "Символы наблюдения, обучения, различения, памяти, ремесленного мастерства и внутренней собранности.", "variant": ""}, {"slug": "denkyem", "name": "Denkyem", "group": "Движение и изменение", "reading": "Крокодил как образ адаптации к воде и суше, способности выживать в разных средах. Символы пути, поворота, адаптации, перехода, течения времени и преобразования.", "variant": ""}, {"slug": "dono-ntoaso", "name": "Dono Ntoaso", "group": "Труд и изобилие", "reading": "Связанные барабаны: непрерывность ритма и коммуникация через звук. Символы работы, урожая, богатства, качества, устойчивого достатка и плодов усилий.", "variant": ""}, {"slug": "dono", "name": "Dono", "group": "Труд и изобилие", "reading": "Барабан как голос сообщества, сигнал и ритмическая память. Символы работы, урожая, богатства, качества, устойчивого достатка и плодов усилий.", "variant": ""}, {"slug": "duafe", "name": "Duafe", "group": "Единство и отношения", "reading": "Символы родства, взаимности, примирения, сотрудничества и социальной ткани сообщества.", "variant": ""}, {"slug": "dwennimmen", "name": "Dwennimmen", "group": "Смелость и власть", "reading": "Рога барана: сила, смирение и достоинство без грубости. Символы лидерства, воинской готовности, личной силы, достоинства и защитной позиции.", "variant": ""}, {"slug": "eban", "name": "Eban", "group": "Дом и защита", "reading": "Ограда/забор: защищённый периметр и безопасный порядок. Символы дома, укрытия, границ, безопасности и внутренней устойчивости.", "variant": ""}, {"slug": "epa", "name": "Epa", "group": "Этика и порядок", "reading": "Символы правды, меры, дисциплины, справедливости, сдержанности и социального баланса.", "variant": ""}, {"slug": "ese-ne-tekrema", "name": "Ese Ne Tekrema", "group": "Искусство и коммуникация", "reading": "Символы музыки, ритма, речи, образа, знака и выразительной формы.", "variant": ""}, {"slug": "esono-anantam", "name": "Esono Anantam", "group": "Движение и изменение", "reading": "Слон, идущий вперёд: массивное, но устойчивое движение. Символы пути, поворота, адаптации, перехода, течения времени и преобразования.", "variant": ""}, {"slug": "fafanto", "name": "Fafanto", "group": "Движение и изменение", "reading": "Движение, смена состояния и адаптация к среде. Символы пути, поворота, адаптации, перехода, течения времени и преобразования.", "variant": ""}, {"slug": "fawohodie", "name": "Fawohodie", "group": "Этика и порядок", "reading": "Свобода как ценность, за которую несут ответственность. Символы правды, меры, дисциплины, справедливости, сдержанности и социального баланса.", "variant": ""}, {"slug": "fihankra", "name": "Fihankra", "group": "Дом и защита", "reading": "Дом-крепость: защищённое внутреннее пространство и граница. Символы дома, укрытия, границ, безопасности и внутренней устойчивости.", "variant": ""}, {"slug": "fofo", "name": "Fofo", "group": "Труд и изобилие", "reading": "Труд, плод, ресурс и устойчивый достаток. Символы работы, урожая, богатства, качества, устойчивого достатка и плодов усилий.", "variant": ""}, {"slug": "funtunfunefu-denkyemfunefu", "name": "Funtunfunefu Denkyemfunefu", "group": "Единство и отношения", "reading": "Сросшиеся крокодилы: общая судьба при разделённом доступе к одному ресурсу. Символы родства, взаимности, примирения, сотрудничества и социальной ткани сообщества.", "variant": ""}, {"slug": "gye-nyame", "name": "Gye Nyame", "group": "Божественное и сакральное", "reading": "Один из самых узнаваемых символов Adinkra; формула абсолютного сакрального превосходства. Символы этой группы связывают порядок мира, имя Бога, судьбу, духовное присутствие и благословение.", "variant": ""}, {"slug": "gye-wani", "name": "Gye Wani", "group": "Мудрость и знание", "reading": "Буквально “держи глаз открытым”: внимательность и осознанное наблюдение. Символы наблюдения, обучения, различения, памяти, ремесленного мастерства и внутренней собранности.", "variant": ""}, {"slug": "hwe-mu-dua", "name": "Hwe Mu Dua", "group": "Мудрость и знание", "reading": "“Измеряй глубину”: проверка качества, точность и осмысленное действие. Символы наблюдения, обучения, различения, памяти, ремесленного мастерства и внутренней собранности.", "variant": ""}, {"slug": "hye-won-hye", "name": "Hye Won Hye", "group": "Божественное и сакральное", "reading": "Неугасаемость и стойкость духа; образ того, что не сгорает. Символы этой группы связывают порядок мира, имя Бога, судьбу, духовное присутствие и благословение.", "variant": ""}, {"slug": "kete-pa", "name": "Kete Pa", "group": "Труд и изобилие", "reading": "“Хорошая ткань/ритм”: качество, изящество и ремесленная точность. Символы работы, урожая, богатства, качества, устойчивого достатка и плодов усилий.", "variant": ""}, {"slug": "kintinkantan", "name": "Kintinkantan", "group": "Смелость и власть", "reading": "Предостережение против самодовольства и чрезмерного раздувания собственной значимости. Символы лидерства, воинской готовности, личной силы, достоинства и защитной позиции.", "variant": ""}, {"slug": "kokuromotie", "name": "Kokuromotie", "group": "Мудрость и знание", "reading": "Символы наблюдения, обучения, различения, памяти, ремесленного мастерства и внутренней собранности.", "variant": ""}, {"slug": "kramo-bone-amma-yeanhu-kramo-pa", "name": "Kramo Bone Amma Yeanhu Kramo Pa", "group": "Этика и порядок", "reading": "Символы правды, меры, дисциплины, справедливости, сдержанности и социального баланса.", "variant": ""}, {"slug": "kuronti-ne-akwamu", "name": "Kuronti Ne Akwamu", "group": "Единство и отношения", "reading": "Символы родства, взаимности, примирения, сотрудничества и социальной ткани сообщества.", "variant": ""}, {"slug": "kwatakye-atiko", "name": "Kwatakye Atiko", "group": "Смелость и власть", "reading": "Линия силы: готовность, защита, лидерство и дисциплина. Символы лидерства, воинской готовности, личной силы, достоинства и защитной позиции.", "variant": ""}, {"slug": "kyemfere", "name": "Kyemfere", "group": "Дом и защита", "reading": "Щит или защитный контур как образ укрытия и обороны. Символы дома, укрытия, границ, безопасности и внутренней устойчивости.", "variant": ""}, {"slug": "mako", "name": "Mako", "group": "Труд и изобилие", "reading": "Перец: жгучая энергия, яркость и стимул к действию. Символы работы, урожая, богатства, качества, устойчивого достатка и плодов усилий.", "variant": ""}, {"slug": "mate-masie", "name": "Mate Masie", "group": "Мудрость и знание", "reading": "“Я слышал и сохранил”: память, внимание и уважительное слушание. Символы наблюдения, обучения, различения, памяти, ремесленного мастерства и внутренней собранности.", "variant": ""}, {"slug": "me-ware-wo", "name": "Me Ware Wo", "group": "Единство и отношения", "reading": "Символы родства, взаимности, примирения, сотрудничества и социальной ткани сообщества.", "variant": ""}, {"slug": "mekyia-wo", "name": "Mekyia Wo", "group": "Единство и отношения", "reading": "Символы родства, взаимности, примирения, сотрудничества и социальной ткани сообщества.", "variant": ""}, {"slug": "menso-wo-kenten", "name": "Menso Wo Kenten", "group": "Единство и отношения", "reading": "Связь, согласование, примирение и социальный баланс. Символы родства, взаимности, примирения, сотрудничества и социальной ткани сообщества.", "variant": ""}, {"slug": "mframadan", "name": "Mframadan", "group": "Дом и защита", "reading": "Структура, способная выдержать давление среды и не потерять форму. Символы дома, укрытия, границ, безопасности и внутренней устойчивости.", "variant": ""}, {"slug": "mmere-dane", "name": "Mmere Dane", "group": "Движение и изменение", "reading": "Время меняется: переход, цикличность и приспособление. Символы пути, поворота, адаптации, перехода, течения времени и преобразования.", "variant": ""}, {"slug": "mmusuyidee", "name": "Mmusuyidee", "group": "Божественное и сакральное", "reading": "Символы этой группы связывают порядок мира, имя Бога, судьбу, духовное присутствие и благословение.", "variant": ""}, {"slug": "mo-no-yo", "name": "Mo No Yo", "group": "Мудрость и знание", "reading": "Символы наблюдения, обучения, различения, памяти, ремесленного мастерства и внутренней собранности.", "variant": ""}, {"slug": "mpatapo", "name": "Mpatapo", "group": "Единство и отношения", "reading": "Узел примирения: связывание конфликта без его эскалации. Символы родства, взаимности, примирения, сотрудничества и социальной ткани сообщества.", "variant": ""}, {"slug": "mpuannum", "name": "Mpuannum", "group": "Смелость и власть", "reading": "Символы лидерства, воинской готовности, личной силы, достоинства и защитной позиции.", "variant": ""}, {"slug": "mrammuo", "name": "Mrammuo", "group": "Смелость и власть", "reading": "Самодисциплина и собранность: не распускаться под давлением. Символы лидерства, воинской готовности, личной силы, достоинства и защитной позиции.", "variant": ""}, {"slug": "nante-yie", "name": "Nante Yie", "group": "Движение и изменение", "reading": "Движение с хорошей удачей и правильным направлением. Символы пути, поворота, адаптации, перехода, течения времени и преобразования.", "variant": ""}, {"slug": "nea-onnim", "name": "Nea Onnim", "group": "Мудрость и знание", "reading": "Признание незнания как точки входа в обучение. Символы наблюдения, обучения, различения, памяти, ремесленного мастерства и внутренней собранности.", "variant": ""}, {"slug": "nea-ope-se-obedi-hene", "name": "Nea Ope Se Obedi Hene", "group": "Мудрость и знание", "reading": "Символы наблюдения, обучения, различения, памяти, ремесленного мастерства и внутренней собранности.", "variant": ""}, {"slug": "nkonsonkonson", "name": "Nkonsonkonson", "group": "Единство и отношения", "reading": "Цепь звеньев: взаимосвязанность людей, семей и обязанностей. Символы родства, взаимности, примирения, сотрудничества и социальной ткани сообщества.", "variant": ""}, {"slug": "nkotimsefo-mpua", "name": "Nkotimsefo Mpua", "group": "История и идентичность", "reading": "Символы происхождения, памяти, наследия, коллективной идентичности и локальной истории.", "variant": ""}, {"slug": "nkrabea", "name": "Nkrabea", "group": "Божественное и сакральное", "reading": "Судьба/жребий: жизнь как путь, в котором есть предначертанность и ответственность. Символы этой группы связывают порядок мира, имя Бога, судьбу, духовное присутствие и благословение.", "variant": ""}, {"slug": "nkyimu", "name": "Nkyimu", "group": "Движение и изменение", "reading": "Разметка, порядок и структурирование пространства. Символы пути, поворота, адаптации, перехода, течения времени и преобразования.", "variant": ""}, {"slug": "nkyinkyim", "name": "Nkyinkyim", "group": "Движение и изменение", "reading": "Непрерывное движение, изворотливость, адаптация и инициативность. Символы пути, поворота, адаптации, перехода, течения времени и преобразования.", "variant": ""}, {"slug": "nnampo-pa-baanu", "name": "Nnampo Pa Baanu", "group": "Единство и отношения", "reading": "Символы родства, взаимности, примирения, сотрудничества и социальной ткани сообщества.", "variant": ""}, {"slug": "nokore", "name": "Nokore", "group": "Этика и порядок", "reading": "Символы правды, меры, дисциплины, справедливости, сдержанности и социального баланса.", "variant": ""}, {"slug": "nsaa", "name": "Nsaa", "group": "Труд и изобилие", "reading": "Высокое качество и мастерство: “не как попало”. Символы работы, урожая, богатства, качества, устойчивого достатка и плодов усилий.", "variant": ""}, {"slug": "nserewa", "name": "Nserewa", "group": "Труд и изобилие", "reading": "Мелкие раковины как образ богатства, ценности и накопления. Символы работы, урожая, богатства, качества, устойчивого достатка и плодов усилий.", "variant": ""}, {"slug": "nsoromma", "name": "Nsoromma", "group": "Мудрость и знание", "reading": "Звезда как знак бдительности, ориентира и небесной поддержки. Символы наблюдения, обучения, различения, памяти, ремесленного мастерства и внутренней собранности.", "variant": ""}, {"slug": "nteasee", "name": "Nteasee", "group": "Единство и отношения", "reading": "Связь, согласование, примирение и социальный баланс. Символы родства, взаимности, примирения, сотрудничества и социальной ткани сообщества.", "variant": ""}, {"slug": "nya-gyidie", "name": "Nya Gyidie", "group": "Божественное и сакральное", "reading": "Символы этой группы связывают порядок мира, имя Бога, судьбу, духовное присутствие и благословение.", "variant": ""}, {"slug": "nyame-biribi-wo-soro", "name": "Nyame Biribi Wo Soro", "group": "Божественное и сакральное", "reading": "Напоминание, что нечто благое и высшее находится “там, наверху”. Символы этой группы связывают порядок мира, имя Бога, судьбу, духовное присутствие и благословение.", "variant": ""}, {"slug": "nyame-dua", "name": "Nyame Dua", "group": "Божественное и сакральное", "reading": "Связь с сакральным именем и высшим порядком. Символы этой группы связывают порядок мира, имя Бога, судьбу, духовное присутствие и благословение.", "variant": ""}, {"slug": "nyame-nnwu-na-mawu", "name": "Nyame Nnwu Na Mawu", "group": "Божественное и сакральное", "reading": "Формула непреходящей духовной жизни: “Бог не умирает, значит и я не умру”. Символы этой группы связывают порядок мира, имя Бога, судьбу, духовное присутствие и благословение.", "variant": ""}, {"slug": "nyame-nti", "name": "Nyame Nti", "group": "Божественное и сакральное", "reading": "“По милости Божьей”: опора на благодать, а не только на собственную силу. Символы этой группы связывают порядок мира, имя Бога, судьбу, духовное присутствие и благословение.", "variant": ""}, {"slug": "nyame-ye-ohene", "name": "Nyame Ye Ohene", "group": "Божественное и сакральное", "reading": "“Бог — царь”: сакральный суверенитет и верховный порядок. Символы этой группы связывают порядок мира, имя Бога, судьбу, духовное присутствие и благословение.", "variant": ""}, {"slug": "nyansapo", "name": "Nyansapo", "group": "Мудрость и знание", "reading": "Узел мудрости: знание, которое связано с практикой и рассудительностью. Символы наблюдения, обучения, различения, памяти, ремесленного мастерства и внутренней собранности.", "variant": ""}, {"slug": "obohemmaa", "name": "Obohemmaa", "group": "Смелость и власть", "reading": "Символы лидерства, воинской готовности, личной силы, достоинства и защитной позиции.", "variant": ""}, {"slug": "odo-nyera-fie-kwan", "name": "Odo Nyera Fie Kwan", "group": "Единство и отношения", "reading": "Символы родства, взаимности, примирения, сотрудничества и социальной ткани сообщества.", "variant": ""}, {"slug": "okodee-mmowere", "name": "Okodee Mmowere", "group": "Смелость и власть", "reading": "Когти/таланты орла: ясность цели, сила захвата и высота взгляда. Символы лидерства, воинской готовности, личной силы, достоинства и защитной позиции.", "variant": ""}, {"slug": "okuafo-pa", "name": "Okuafo Pa", "group": "Труд и изобилие", "reading": "Хороший земледелец: труд, забота и правильное ведение дела. Символы работы, урожая, богатства, качества, устойчивого достатка и плодов усилий.", "variant": ""}, {"slug": "onyankopon-adom-nti-biribiara-beye-yie", "name": "Onyankopon Adom Nti Biribiara Beye Yie", "group": "Божественное и сакральное", "reading": "Длинная формула доверия к благодати: всё будет хорошо. Символы этой группы связывают порядок мира, имя Бога, судьбу, духовное присутствие и благословение.", "variant": ""}, {"slug": "osram-ne-nsoromma", "name": "Osram Ne Nsoromma", "group": "Единство и отношения", "reading": "Связь, согласование, примирение и социальный баланс. Символы родства, взаимности, примирения, сотрудничества и социальной ткани сообщества.", "variant": ""}, {"slug": "owo-foro-adobe", "name": "Owo Foro Adobe", "group": "Движение и изменение", "reading": "Символы пути, поворота, адаптации, перехода, течения времени и преобразования.", "variant": ""}, {"slug": "owuo-atwedee", "name": "Owuo Atwedee", "group": "Мудрость и знание", "reading": "Символы наблюдения, обучения, различения, памяти, ремесленного мастерства и внутренней собранности.", "variant": ""}, {"slug": "pempamsie", "name": "Pempamsie", "group": "Дом и защита", "reading": "Сцепление, которое укрепляет: готовность связать и удержать структуру. Символы дома, укрытия, границ, безопасности и внутренней устойчивости.", "variant": ""}, {"slug": "sankofa-one", "name": "Sankofa · Variant 1", "group": "Мудрость и знание", "reading": "Один из двух графических вариантов Sankofa. Идея возврата к источнику ради извлечения ценного смысла. Символы наблюдения, обучения, различения, памяти, ремесленного мастерства и внутренней собранности.", "variant": "variant"}, {"slug": "sankofa-two", "name": "Sankofa · Variant 2", "group": "Мудрость и знание", "reading": "Альтернативный графический вариант Sankofa. Тот же семантический узел: возврат к источнику и извлечение ценности из прошлого. Символы наблюдения, обучения, различения, памяти, ремесленного мастерства и внутренней собранности.", "variant": "variant"}, {"slug": "sepow", "name": "Sepow", "group": "Смелость и власть", "reading": "Нож/меч как точность различения, а не только как насилие. Символы лидерства, воинской готовности, личной силы, достоинства и защитной позиции.", "variant": ""}, {"slug": "sesa-wo-suban", "name": "Sesa Wo Suban", "group": "Этика и порядок", "reading": "“Измени свой характер”: символ внутренней трансформации. Символы правды, меры, дисциплины, справедливости, сдержанности и социального баланса.", "variant": ""}, {"slug": "som-onyankopon", "name": "Som Onyankopon", "group": "Божественное и сакральное", "reading": "Связь с сакральным именем и высшим порядком. Символы этой группы связывают порядок мира, имя Бога, судьбу, духовное присутствие и благословение.", "variant": ""}, {"slug": "sunsum", "name": "Sunsum", "group": "Божественное и сакральное", "reading": "Дух как нематериальная сила присутствия и характера. Символы этой группы связывают порядок мира, имя Бога, судьбу, духовное присутствие и благословение.", "variant": ""}, {"slug": "tabono", "name": "Tabono", "group": "Движение и изменение", "reading": "Весло как образ слаженного движения и группового ритма. Символы пути, поворота, адаптации, перехода, течения времени и преобразования.", "variant": ""}, {"slug": "tamfo-bebre", "name": "Tamfo Bebre", "group": "Смелость и власть", "reading": "Сдерживание или нейтрализация угрозы. Символы лидерства, воинской готовности, личной силы, достоинства и защитной позиции.", "variant": ""}, {"slug": "uac-nkanea", "name": "UAC Nkanea", "group": "Труд и изобилие", "reading": "Современный институциональный знак внутри набора; трактуется как свет, видимость и ориентир. Символы работы, урожая, богатства, качества, устойчивого достатка и плодов усилий.", "variant": ""}, {"slug": "wawa-aba", "name": "Wawa Aba", "group": "Труд и изобилие", "reading": "Труд, плод, ресурс и устойчивый достаток. Символы работы, урожая, богатства, качества, устойчивого достатка и плодов усилий.", "variant": ""}, {"slug": "wo-nsa-da-mu", "name": "Wo Nsa Da Mu", "group": "Дом и защита", "reading": "“Твоя рука в твоих”: ответственность, самостоятельность и внутренняя опора. Символы дома, укрытия, границ, безопасности и внутренней устойчивости.", "variant": ""}, {"slug": "woforo-dua-pa", "name": "Woforo Dua Pa", "group": "Движение и изменение", "reading": "Упорство должно быть направлено к доброй цели, а не к случайному усилию. Символы пути, поворота, адаптации, перехода, течения времени и преобразования.", "variant": ""}];
+
+    const root = document.body;
+    const content = document.getElementById('content');
+    const stats = document.getElementById('stats');
+    const sectionNav = document.getElementById('sectionNav');
+    const searchInput = document.getElementById('searchInput');
+    const emptyState = document.getElementById('emptyState');
+
+    const modal = document.getElementById('modal');
+    const modalIcon = document.getElementById('modalIcon');
+    const modalName = document.getElementById('modalName');
+    const modalSlug = document.getElementById('modalSlug');
+    const modalGroup = document.getElementById('modalGroup');
+    const modalClass = document.getElementById('modalClass');
+    const modalReading = document.getElementById('modalReading');
+    const snippet = document.getElementById('snippet');
+    const closeModal = document.getElementById('closeModal');
+    const copySnippet = document.getElementById('copySnippet');
+
+    const themeLight = document.getElementById('themeLight');
+    const themeDark = document.getElementById('themeDark');
+    const goldToggle = document.getElementById('goldToggle');
+    const expandAll = document.getElementById('expandAll');
+    const copyAll = document.getElementById('copyAll');
+
+
+    const GROUP_ORDER = [
+      'Божественное и сакральное',
+      'Мудрость и знание',
+      'Единство и отношения',
+      'Смелость и власть',
+      'Труд и изобилие',
+      'Дом и защита',
+      'Движение и изменение',
+      'Искусство и коммуникация',
+      'Этика и порядок',
+      'История и идентичность'
+    ];
+
+    const state = {
+      theme: localStorage.getItem('adinkra-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'),
+      gold: localStorage.getItem('adinkra-gold') === 'true',
+      query: '',
+      collapsed: false
+    };
+
+    function slugToLabel(slug) {
+      return slug
+        .replace(/-/g, ' ')
+        .replace(/\b\w/g, s => s.toUpperCase());
+    }
+
+    function iconMarkup(slug) {
+      return `<i class="adk adk-${slug}" aria-hidden="true"></i>`;
+    }
+
+    function safeText(value) {
+      return String(value ?? '');
+    }
+
+    function buildSections() {
+      const grouped = new Map();
+      for (const item of SYMBOLS) {
+        if (!grouped.has(item.group)) grouped.set(item.group, []);
+        grouped.get(item.group).push(item);
+      }
+
+      const groupsInOrder = GROUP_ORDER.filter(group => grouped.has(group))
+        .concat(Array.from(grouped.keys()).filter(group => !GROUP_ORDER.includes(group)));
+
+      sectionNav.innerHTML = groupsInOrder.map((group, i) =>
+        `<button class="nav-chip" type="button" data-target="group-${i}">${group} <span style="opacity:.7">(${
+          grouped.get(group).length
+        })</span></button>`
+      ).join('');
+
+      content.innerHTML = groupsInOrder.map((group, i) => {
+        const items = grouped.get(group);
+        const desc = GROUPS[group]?.desc || '';
+        return `
+          <section class="group" id="group-${i}" data-group="${group}">
+            <div class="group-head">
+              <h2 class="group-title">${group}</h2>
+              <div class="group-desc">${desc}</div>
+            </div>
+            <div class="group-grid">
+              ${items.map(item => `
+                <button
+                  class="card"
+                  type="button"
+                  data-name="${item.name}"
+                  data-slug="${item.slug}"
+                  data-group="${item.group}"
+                  data-reading="${escapeHtml(item.reading)}"
+                  data-name-lower="${escapeAttr(item.name.toLowerCase())}"
+                  data-slug-lower="${escapeAttr(item.slug.toLowerCase())}"
+                  data-group-lower="${escapeAttr(item.group.toLowerCase())}"
+                  data-search="${escapeAttr((item.name + ' ' + item.slug + ' ' + item.group + ' ' + item.reading).toLowerCase())}"
+                >
+                  <div class="icon-wrap">${iconMarkup(item.slug)}</div>
+                  <div class="card-name">${item.name}</div>
+                  <div class="card-meta">
+                    <span class="pill">${item.group}</span>
+                    <span class="pill gold">${item.slug}</span>
+                  </div>
+                  <div class="card-read">${shortReading(item.reading)}</div>
+                </button>
+              `).join('')}
+            </div>
+          </section>
+        `;
+      }).join('');
+    }
+
+    function shortReading(text) {
+      const s = String(text || '').replace(/\s+/g, ' ').trim();
+      return s.length > 92 ? s.slice(0, 92).trim() + '…' : s;
+    }
+
+    function escapeHtml(s) {
+      return String(s)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;');
+    }
+    function escapeAttr(s) {
+      return escapeHtml(s).replaceAll('"', '&quot;');
+    }
+
+    function applyTheme() {
+      root.setAttribute('data-theme', state.theme);
+      root.setAttribute('data-gold', String(state.gold));
+      localStorage.setItem('adinkra-theme', state.theme);
+      localStorage.setItem('adinkra-gold', String(state.gold));
+      themeLight.classList.toggle('active', state.theme === 'light');
+      themeDark.classList.toggle('active', state.theme === 'dark');
+      goldToggle.classList.toggle('active', state.gold);
+      goldToggle.textContent = state.gold ? 'Золотой режим: вкл.' : 'Золотой режим';
+    }
+
+    function openModal(item) {
+      modalIcon.innerHTML = iconMarkup(item.slug);
+      modalName.textContent = item.name;
+      modalSlug.textContent = `Класс: .adk .adk-${item.slug}`;
+      modalGroup.textContent = item.group;
+      modalClass.textContent = `adk adk-${item.slug}`;
+      modalReading.textContent = item.reading;
+
+      snippet.textContent = [
+        '<link rel="stylesheet" href="https://ahiakwa.github.io/assets/adinkra-icons/css/icons.min.css">',
+        '',
+        `<i class="adk adk-${item.slug}"></i>`
+      ].join('\n');
+
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeTheModal() {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    function renderStats() {
+      const visible = Array.from(content.querySelectorAll('.card:not(.hidden)')).length;
+      stats.innerHTML = `
+        <span>Всего символов: <strong>${SYMBOLS.length}</strong></span>
+        <span>Показано по фильтру: <strong>${visible}</strong></span>
+        <span>Групп: <strong>${content.querySelectorAll('.group:not(.hidden)').length}</strong></span>
+      `;
+    }
+
+    function filterCards() {
+      const q = state.query.trim().toLowerCase();
+      const groups = content.querySelectorAll('.group');
+
+      groups.forEach(group => {
+        let visibleCount = 0;
+        const cards = group.querySelectorAll('.card');
+        cards.forEach(card => {
+          const text = card.dataset.search || '';
+          const show = !q || text.includes(q);
+          card.classList.toggle('hidden', !show);
+          if (show) visibleCount += 1;
+        });
+        const keep = visibleCount > 0;
+        group.classList.toggle('hidden', !keep);
+      });
+
+      const anyVisible = content.querySelectorAll('.card:not(.hidden)').length > 0;
+      emptyState.classList.toggle('hidden', anyVisible);
+      renderStats();
+    }
+
+    function collapseToggle() {
+      state.collapsed = !state.collapsed;
+      content.querySelectorAll('.group-grid').forEach(grid => {
+        grid.style.display = state.collapsed ? 'none' : '';
+      });
+      expandAll.textContent = state.collapsed ? 'Развернуть группы' : 'Свернуть/развернуть';
+    }
+
+    function attachEvents() {
+      themeLight.addEventListener('click', () => {
+        state.theme = 'light';
+        applyTheme();
+      });
+      themeDark.addEventListener('click', () => {
+        state.theme = 'dark';
+        applyTheme();
+      });
+      goldToggle.addEventListener('click', () => {
+        state.gold = !state.gold;
+        applyTheme();
+      });
+
+      searchInput.addEventListener('input', (e) => {
+        state.query = e.target.value || '';
+        filterCards();
+      });
+
+      sectionNav.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-target]');
+        if (!btn) return;
+        const el = document.getElementById(btn.dataset.target);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+
+      content.addEventListener('click', (e) => {
+        const card = e.target.closest('.card');
+        if (!card) return;
+        const item = SYMBOLS.find(x => x.slug === card.dataset.slug);
+        if (item) openModal(item);
+      });
+
+      closeModal.addEventListener('click', closeTheModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeTheModal();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeTheModal();
+      });
+
+      copySnippet.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(snippet.textContent);
+          copySnippet.textContent = 'Скопировано';
+          setTimeout(() => copySnippet.textContent = 'Копировать', 1200);
+        } catch {
+          copySnippet.textContent = 'Не удалось';
+          setTimeout(() => copySnippet.textContent = 'Копировать', 1200);
+        }
+      });
+
+      copyAll.addEventListener('click', async () => {
+        const template = [
+          '<link rel="stylesheet" href="https://ahiakwa.github.io/assets/adinkra-icons/css/icons.min.css">',
+          '<i class="adk adk-akoma"></i>',
+          '<i class="adk adk-gye-nyame"></i>',
+          '<i class="adk adk-sankofa-one"></i>',
+          '<i class="adk adk-sankofa-two"></i>'
+        ].join('\n');
+        try {
+          await navigator.clipboard.writeText(template);
+          copyAll.textContent = 'Скопировано';
+          setTimeout(() => copyAll.textContent = 'Скопировать шаблон', 1200);
+        } catch {
+          copyAll.textContent = 'Не удалось';
+          setTimeout(() => copyAll.textContent = 'Скопировать шаблон', 1200);
+        }
+      });
+
+      expandAll.textContent = 'Свернуть/развернуть';
+      expandAll.addEventListener('click', collapseToggle);
+    }
+
+    function init() {
+      buildSections();
+      applyTheme();
+      attachEvents();
+      filterCards();
+    }
+
+    init();
+  </script>
+</body>
+</html>
