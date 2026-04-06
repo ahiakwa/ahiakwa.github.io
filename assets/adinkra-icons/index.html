@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Adinkra · алфавит символов</title>
+    <link rel="stylesheet" href="https://ahiakwa.github.io/assets/adinkra-icons/css/icons.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f7f5f0;
+            font-family: system-ui, -apple-system, 'Inter', 'Segoe UI', Roboto, Helvetica, sans-serif;
+            padding: 2rem 1.5rem;
+            color: #1f1e1c;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid #e2ddd4;
+            padding-bottom: 1.75rem;
+        }
+
+        .header h1 {
+            font-weight: 450;
+            font-size: 2.2rem;
+            letter-spacing: -0.3px;
+            color: #2c2a27;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h1 span {
+            font-weight: 350;
+            color: #b26b3b;
+            background: #f0ebe3;
+            padding: 0.1rem 0.5rem;
+            border-radius: 32px;
+            font-size: 1.3rem;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .sub {
+            color: #6b6257;
+            font-size: 0.9rem;
+            font-weight: 400;
+            margin-top: 0.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.4;
+        }
+
+        .local-note {
+            background: #f0ebe3;
+            border-radius: 48px;
+            padding: 0.4rem 1rem;
+            font-size: 0.75rem;
+            display: inline-block;
+            margin-top: 0.8rem;
+            color: #7e6b55;
+        }
+
+        .alphabet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .symbol-card {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 1.5rem 0.75rem 1rem 0.75rem;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
+            border: 1px solid #ece6de;
+        }
+
+        .symbol-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 24px -12px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.02);
+            border-color: #dcd2c6;
+            background: #fefefc;
+        }
+
+        .icon-wrapper {
+            font-size: 3.4rem;
+            line-height: 1.2;
+            margin-bottom: 0.9rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80px;
+        }
+
+        .icon-wrapper i {
+            display: inline-block;
+            font-size: 3.2rem;
+            font-style: normal;
+        }
+
+        [class^="adinkra-"]:before,
+        [class*=" adinkra-"]:before {
+            font-size: inherit;
+            line-height: 1;
+        }
+
+        .symbol-name {
+            font-weight: 520;
+            font-size: 1rem;
+            letter-spacing: -0.2px;
+            color: #2f2c28;
+            margin-bottom: 0.3rem;
+            background: #faf8f4;
+            display: inline-block;
+            padding: 0.1rem 0.5rem;
+            border-radius: 40px;
+        }
+
+        .symbol-meaning {
+            font-size: 0.75rem;
+            color: #857a6b;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            font-weight: 430;
+            margin-top: 0.3rem;
+            border-top: 1px solid #f0e9e1;
+            padding-top: 0.5rem;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .footer-note {
+            margin-top: 3.5rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #b1a694;
+            border-top: 1px solid #e9e2d8;
+            padding-top: 1.8rem;
+            letter-spacing: 0.2px;
+        }
+
+        @media (max-width: 580px) {
+            body { padding: 1.2rem; }
+            .alphabet-grid { gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+            .icon-wrapper { font-size: 2.8rem; }
+            .symbol-name { font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Adinkra <span>алфавит</span></h1>
+        <div class="sub">
+            ✦ символы мудрости, философии и наследия акан ✦<br>
+            минималистичный справочник • иконки из библиотеки Adinkra Icons
+        </div>
+        <div class="local-note">✓ безопасно для локального просмотра (без активных ссылок)</div>
+    </div>
+
+    <div id="adinkra-grid" class="alphabet-grid"></div>
+    <div class="footer-note">
+        каждый символ — часть культурного кода Западной Африки • знаки в алфавитном порядке названий акан
+    </div>
+</div>
+
+<script>
+    (function() {
+        // Символы Adinkra (классы из официального CSS)
+        const adinkraSymbols = [
+            { className: "adinkra-adinkrahene", akanName: "Adinkrahene", meaning: "вождь / величие" },
+            { className: "adinkra-akoben", akanName: "Akoben", meaning: "военный рог / бдительность" },
+            { className: "adinkra-akofena", akanName: "Akofena", meaning: "меч войны / мужество" },
+            { className: "adinkra-akokonan", akanName: "Akokonan", meaning: "куриные ноги / забота" },
+            { className: "adinkra-akoma", akanName: "Akoma", meaning: "сердце / терпение" },
+            { className: "adinkra-akooben", akanName: "Akooben", meaning: "рог войны / решимость" },
+            { className: "adinkra-ankra", akanName: "Ankra", meaning: "божественный покой" },
+            { className: "adinkra-bese-saka", akanName: "Bese Saka", meaning: "изобилие" },
+            { className: "adinkra-duafe", akanName: "Duafe", meaning: "женственность" },
+            { className: "adinkra-dwennimmen", akanName: "Dwennimmen", meaning: "смирение + сила" },
+            { className: "adinkra-epa", akanName: "Epa", meaning: "правосудие" },
+            { className: "adinkra-funtunfunefu", akanName: "Funtunfunefu", meaning: "единство" },
+            { className: "adinkra-gye-nyame", akanName: "Gye Nyame", meaning: "всемогущество Бога" },
+            { className: "adinkra-hye-wo-nhye", akanName: "Hye Wo Nhye", meaning: "бессмертие души" },
+            { className: "adinkra-mate-masie", akanName: "Mate Masie", meaning: "мудрость" },
+            { className: "adinkra-nea-ope-se-obeye", akanName: "Nea Ope Se Obeye", meaning: "действие / воля" },
+            { className: "adinkra-nkyinkyim", akanName: "Nkyinkyim", meaning: "инициатива" },
+            { className: "adinkra-nsoromma", akanName: "Nsoromma", meaning: "звезда / руководство" },
+            { className: "adinkra-nyame-nwu-na-mawu", akanName: "Nyame Nwu Na Mawu", meaning: "бессмертие духа" },
+            { className: "adinkra-nyansapo", akanName: "Nyansapo", meaning: "узел мудрости" },
+            { className: "adinkra-okodee-mmowere", akanName: "Okodee Mmowere", meaning: "отвага" },
+            { className: "adinkra-osram-ne-nsoromma", akanName: "Osram Ne Nsoromma", meaning: "любовь и верность" },
+            { className: "adinkra-owuo-atedie", akanName: "Owuo Atedie", meaning: "неизбежность" },
+            { className: "adinkra-sankofa", akanName: "Sankofa", meaning: "уроки предков" },
+            { className: "adinkra-woforo-dua", akanName: "Woforo Dua", meaning: "поддержка" },
+            { className: "adinkra-ako", akanName: "Ako", meaning: "красноречие" },
+            { className: "adinkra-nyame-nwu", akanName: "Nyame Nwu", meaning: "бессмертие Бога" }
+        ];
+
+        // Алфавитный порядок по названию акан
+        const sorted = [...adinkraSymbols].sort((a,b) => a.akanName.localeCompare(b.akanName));
+
+        const grid = document.getElementById('adinkra-grid');
+        if (!grid) return;
+
+        grid.innerHTML = '';
+        for (const sym of sorted) {
+            const card = document.createElement('div');
+            card.className = 'symbol-card';
+
+            const iconWrap = document.createElement('div');
+            iconWrap.className = 'icon-wrapper';
+            const icon = document.createElement('i');
+            icon.className = sym.className;
+            icon.setAttribute('aria-label', `Adinkra: ${sym.akanName}`);
+            iconWrap.appendChild(icon);
+
+            const nameDiv = document.createElement('div');
+            nameDiv.className = 'symbol-name';
+            nameDiv.textContent = sym.akanName;
+
+            const meaningDiv = document.createElement('div');
+            meaningDiv.className = 'symbol-meaning';
+            meaningDiv.textContent = sym.meaning;
+
+            card.appendChild(iconWrap);
+            card.appendChild(nameDiv);
+            card.appendChild(meaningDiv);
+            grid.appendChild(card);
+        }
+    })();
+</script>
+</body>
+</html>
