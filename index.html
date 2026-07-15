@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ghana Gene Pool · Ahiakwa Clan</title>
+    <!-- Adinkra Icons (CSS & Font) -->
+    <link rel="stylesheet" href="https://ahiakwa.github.io/assets/adinkra-icons/css/icons.min.css" />
+    <style>
+        /* ----- RESET & BASE ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Глобальное скрытие скроллбара */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        body {
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+        }
+
+        body {
+            background: #10131c;
+            color: #cfdbe8;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 30px 20px;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: rgba(20, 25, 38, 0.7);
+            backdrop-filter: blur(2px);
+            border-radius: 28px;
+            padding: 35px 30px 30px;
+            border: 1px solid #2a334a;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        /* ----- TYPOGRAPHY ----- */
+        h1, h2, h3 {
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .title {
+            text-align: center;
+            border-bottom: 1px solid #2a334a;
+            padding-bottom: 20px;
+            margin-bottom: 28px;
+        }
+
+        .title h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #d4af37;
+            letter-spacing: 3px;
+        }
+
+        .title h1 .adk {
+            color: #d4af37;
+            margin-right: 12px;
+            font-size: 2rem;
+        }
+
+        .title .sub {
+            display: block;
+            font-size: 0.9rem;
+            color: #8899b3;
+            margin-top: 6px;
+            letter-spacing: 2px;
+        }
+
+        .title .sub .adk {
+            color: #d4af37;
+            margin: 0 6px;
+        }
+
+        /* ----- TREE (FLEX) ----- */
+        .tree {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .tree-root {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #d4af37;
+            background: #1a212e;
+            padding: 8px 24px;
+            border-radius: 40px;
+            border: 1px solid #2a334a;
+            margin-bottom: 18px;
+        }
+
+        .tree-root .adk {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .branches {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px 40px;
+            width: 100%;
+        }
+
+        .branch {
+            flex: 1 1 280px;
+            min-width: 220px;
+            background: #141b26;
+            border-radius: 16px;
+            padding: 18px 16px 16px;
+            border: 1px solid #26303f;
+            transition: border 0.2s;
+        }
+
+        .branch:hover {
+            border-color: #d4af3760;
+        }
+
+        .branch-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: #d4af37;
+            border-bottom: 1px solid #1f2a38;
+            padding-bottom: 10px;
+            margin-bottom: 14px;
+        }
+
+        .branch-header .adk {
+            font-size: 1.4rem;
+            width: 1.8rem;
+            text-align: center;
+            color: #d4af37;
+        }
+
+        .branch-header .badge {
+            margin-left: auto;
+            font-size: 0.7rem;
+            background: #1f2a38;
+            padding: 2px 12px;
+            border-radius: 20px;
+            color: #8899b3;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .branch-header .badge .adk {
+            font-size: 0.7rem;
+            margin-right: 4px;
+            color: #8899b3;
+        }
+
+        .branch-content {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-size: 0.9rem;
+        }
+
+        .branch-content .clan {
+            background: #10161f;
+            padding: 6px 12px;
+            border-radius: 8px;
+            border-left: 3px solid #d4af37;
+            font-weight: 500;
+            color: #eaf0f6;
+        }
+
+        .branch-content .clan .adk {
+            color: #d4af37;
+            margin-right: 8px;
+            font-size: 1rem;
+        }
+
+        .branch-content .clan small {
+            display: block;
+            font-weight: 300;
+            color: #8899b3;
+            font-size: 0.8rem;
+            margin-top: 2px;
+        }
+
+        .branch-content .subclan {
+            padding-left: 18px;
+            border-left: 1px solid #26303f;
+            margin-left: 6px;
+            padding-top: 4px;
+            padding-bottom: 4px;
+            font-size: 0.85rem;
+            color: #b9c9db;
+        }
+
+        .branch-content .subclan .adk {
+            color: #d4af37;
+            width: 1.4rem;
+            margin-right: 6px;
+            font-size: 0.9rem;
+        }
+
+        .branch-content .highlight-block {
+            background: #10161f;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border-left: 3px solid #d4af37;
+            margin: 4px 0;
+        }
+
+        .branch-content .highlight-block .adk {
+            color: #d4af37;
+            margin-right: 8px;
+            font-size: 1rem;
+        }
+
+        .branch-content .highlight-block strong {
+            color: #d4af37;
+        }
+
+        .branch-content .highlight-block .sub {
+            font-size: 0.75rem;
+            color: #8899b3;
+        }
+
+        .branch-content .highlight-block .sub .adk {
+            font-size: 0.75rem;
+            margin-right: 4px;
+        }
+
+        /* ----- GEORGE BLOCK (TWO CARDS) ----- */
+        .george-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 28px 0 32px;
+        }
+
+        .george-card {
+            flex: 1 1 220px;
+            background: #141b26;
+            border-radius: 16px;
+            padding: 18px 16px 16px;
+            border: 1px solid #26303f;
+            transition: border 0.2s;
+            text-align: center;
+        }
+
+        .george-card:hover {
+            border-color: #d4af3760;
+        }
+
+        .george-card .name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #d4af37;
+            letter-spacing: 0.5px;
+        }
+
+        .george-card .name .adk {
+            margin-right: 8px;
+            font-size: 1.4rem;
+        }
+
+        .george-card .lineage {
+            font-size: 0.8rem;
+            color: #8899b3;
+            margin-top: 2px;
+        }
+
+        .george-card .stats {
+            margin-top: 14px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px 10px;
+            font-size: 0.85rem;
+            text-align: left;
+        }
+
+        .george-card .stats .label {
+            color: #8899b3;
+        }
+
+        .george-card .stats .label .adk {
+            margin-right: 4px;
+            font-size: 0.8rem;
+            color: #6a7f98;
+        }
+
+        .george-card .stats .value {
+            color: #eaf0f6;
+            text-align: right;
+            font-weight: 500;
+        }
+
+        .george-card .stats .value.gold {
+            color: #d4af37;
+        }
+
+        .george-card .genetic {
+            margin-top: 14px;
+            background: #10161f;
+            border-radius: 30px;
+            padding: 5px 16px;
+            display: inline-block;
+            font-size: 0.8rem;
+            border: 1px solid #26303f;
+            color: #b9c9db;
+        }
+
+        .george-card .genetic .adk {
+            color: #d4af37;
+            margin-right: 6px;
+            font-size: 0.9rem;
+        }
+
+        .george-card .genetic strong {
+            color: #d4af37;
+            font-weight: 500;
+        }
+
+        /* ----- COMPARISON MATRIX ----- */
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 6px;
+        }
+
+        .comp-col {
+            background: #141b26;
+            border-radius: 16px;
+            padding: 18px 16px 16px;
+            border: 1px solid #26303f;
+        }
+
+        .comp-col h3 {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #d4af37;
+            border-bottom: 1px solid #1f2a38;
+            padding-bottom: 10px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .comp-col h3 .adk {
+            font-size: 1.2rem;
+            width: 1.6rem;
+        }
+
+        .comp-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            font-size: 0.85rem;
+            border-bottom: 1px solid #1a222e;
+        }
+
+        .comp-row .tag {
+            color: #8899b3;
+        }
+
+        .comp-row .tag .adk {
+            width: 1.4rem;
+            margin-right: 6px;
+            font-size: 0.9rem;
+            color: #6a7f98;
+        }
+
+        .comp-row .val {
+            color: #eaf0f6;
+            font-weight: 450;
+        }
+
+        .comp-row .val.gold {
+            color: #d4af37;
+        }
+
+        /* ----- FOOTER ----- */
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #5a6f86;
+            border-top: 1px solid #1f2a38;
+            padding-top: 18px;
+            letter-spacing: 1px;
+        }
+
+        .footer .adk {
+            color: #d4af37;
+            margin: 0 4px;
+            font-size: 0.9rem;
+        }
+
+        .footer .highlight {
+            color: #d4af37;
+        }
+
+        .footer .highlight .adk {
+            margin-right: 4px;
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 700px) {
+            .container {
+                padding: 20px 15px;
+            }
+            .title h1 {
+                font-size: 1.6rem;
+            }
+            .branches {
+                flex-direction: column;
+                align-items: center;
+            }
+            .branch {
+                width: 100%;
+                max-width: 400px;
+            }
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+            .george-row {
+                flex-direction: column;
+                align-items: center;
+            }
+            .george-card {
+                width: 100%;
+                max-width: 360px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title h1 {
+                font-size: 1.3rem;
+            }
+            .branch-header {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="title">
+            <h1>
+                <i class="adk adk-nyame-nnwu-na-mawu"></i>Ghana Gene Pool
+            </h1>
+            <span class="sub">
+                <i class="adk adk-nkonsonkonson"></i> Two fundamental anthropogenetic branches <i class="adk adk-nkonsonkonson"></i>
+            </span>
+        </div>
+
+        <!-- TREE -->
+        <div class="tree">
+            <div class="tree-root"><i class="adk adk-adinkrahene"></i> West Africa</div>
+            <div class="branches">
+                <!-- Branch 1: Southern -->
+                <div class="branch">
+                    <div class="branch-header">
+                        <i class="adk adk-nyame-dua" style="color:#d4af37;"></i> Branch 1 · Southern
+                        <span class="badge"><i class="adk adk-akoma"></i> your lineage</span>
+                    </div>
+                    <div class="branch-content">
+                        <div class="clan">
+                            <i class="adk adk-aya"></i> «Guinean forest‑coastal type»
+                        </div>
+                        <div class="subclan">
+                            <i class="adk adk-abusua-pa"></i> <strong>Akan</strong> (Ashanti, Akwamu)
+                        </div>
+                        <div class="subclan">
+                            <i class="adk adk-abusua-pa"></i> <strong>Ga</strong> (Accra, Otu bluhum)
+                        </div>
+                        <div class="highlight-block">
+                            <i class="adk adk-adinkrahene"></i> <strong>Ahiakwa Tette Clan</strong>
+                            <div class="sub"><i class="adk adk-bese-saka"></i> Gold &amp; Technology</div>
+                        </div>
+                        <div class="subclan" style="border-left-color:#d4af37;">
+                            <i class="adk adk-nyansapo"></i> <strong>Southern Ghana Genetics</strong>
+                        </div>
+                        <div class="subclan" style="border-left-color:#d4af37;">
+                            <i class="adk adk-akofena"></i> <strong>Managerial Elite</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Branch 2: Northern -->
+                <div class="branch">
+                    <div class="branch-header">
+                        <i class="adk adk-esono-anantam" style="color:#7a8b9f;"></i> Branch 2 · Northern
+                        <span class="badge"><i class="adk adk-nyame-biribi-wo-soro"></i> savanna</span>
+                    </div>
+                    <div class="branch-content">
+                        <div class="clan" style="border-left-color:#7a8b9f;">
+                            <i class="adk adk-tamfo-bebre" style="color:#7a8b9f;"></i> «Dry Savanna»
+                        </div>
+                        <div class="subclan">
+                            <i class="adk adk-abusua-pa"></i> <strong>Mole‑Dagbon</strong> (Dagomba, Mamprusi, Gurusi)
+                        </div>
+                        <div class="highlight-block" style="border-left-color:#7a8b9f;">
+                            <i class="adk adk-nante-yie" style="color:#7a8b9f;"></i> <strong style="color:#b9c9db;">Sahel Line</strong>
+                            <div class="sub" style="color:#6a7f98;"><i class="adk adk-mmere-dane"></i> Macroschelia · Dry type</div>
+                        </div>
+                        <div class="subclan" style="border-left-color:#7a8b9f;">
+                            <i class="adk adk-hwe-mu-dua"></i> <strong>Height:</strong> 185–195+ cm · <strong>Weight:</strong> 65–72 kg
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GEORGE AHIAKWA + SAHEL LINE -->
+        <div class="george-row">
+            <div class="george-card">
+                <div class="name"><i class="adk adk-nsoromma"></i> GEORGE AHIAKWA</div>
+                <div class="lineage">Ahiakwa Tette · Guinean Forest</div>
+                <div class="stats">
+                    <span class="label"><i class="adk adk-hwe-mu-dua"></i> Height</span>
+                    <span class="value gold">172 cm</span>
+                    <span class="label"><i class="adk adk-asase-ye-duru"></i> Weight</span>
+                    <span class="value gold">~75 kg</span>
+                    <span class="label"><i class="adk adk-sunsum"></i> Somatotype</span>
+                    <span class="value gold">Mesomorph</span>
+                    <span class="label"><i class="adk adk-mmere-dane"></i> Proportions</span>
+                    <span class="value gold">Brachyskelia</span>
+                    <span class="label"><i class="adk adk-dwennimmen"></i> Skeleton</span>
+                    <span class="value gold">Heavy</span>
+                    <span class="label"><i class="adk adk-mako"></i> Musculature</span>
+                    <span class="value gold">Explosive</span>
+                </div>
+                <div class="genetic">
+                    <i class="adk adk-sankofa-one"></i> <strong>rs1815739</strong> · ACTN3 RR
+                </div>
+            </div>
+
+            <div class="george-card" style="border-color:#3a465b;">
+                <div class="name" style="color:#b9c9db;">
+                    <i class="adk adk-nyame-dua" style="color:#7a8b9f;"></i> SAHEL LINE
+                </div>
+                <div class="lineage" style="color:#7a8b9f;">Northern branch</div>
+                <div class="stats">
+                    <span class="label"><i class="adk adk-hwe-mu-dua"></i> Height</span>
+                    <span class="value" style="color:#b9c9db;">185–195+ cm</span>
+                    <span class="label"><i class="adk adk-asase-ye-duru"></i> Weight</span>
+                    <span class="value" style="color:#b9c9db;">65–72 kg</span>
+                    <span class="label"><i class="adk adk-sunsum"></i> Somatotype</span>
+                    <span class="value" style="color:#b9c9db;">Ectomorph</span>
+                    <span class="label"><i class="adk adk-mmere-dane"></i> Proportions</span>
+                    <span class="value" style="color:#b9c9db;">Macroschelia</span>
+                    <span class="label"><i class="adk adk-dwennimmen"></i> Skeleton</span>
+                    <span class="value" style="color:#b9c9db;">Light</span>
+                    <span class="label"><i class="adk adk-mako"></i> Musculature</span>
+                    <span class="value" style="color:#b9c9db;">Endurance</span>
+                </div>
+                <div class="genetic" style="border-color:#3a465b; color:#8899b3;">
+                    <i class="adk adk-mmere-dane"></i> <strong style="color:#b9c9db;">Macroschelia</strong> · Dry type
+                </div>
+            </div>
+        </div>
+
+        <!-- COMPARISON MATRIX -->
+        <div class="comparison">
+            <div class="comp-col">
+                <h3><i class="adk adk-nyame-nti" style="color:#d4af37;"></i> Branch 1 · Southern</h3>
+                <div class="comp-row">
+                    <span class="tag"><i class="adk adk-sunsum"></i> Somatotype</span>
+                    <span class="val gold">Mesomorph (Stocky)</span>
+                </div>
+                <div class="comp-row">
+                    <span class="tag"><i class="adk adk-mmere-dane"></i> Proportions</span>
+                    <span class="val gold">Brachyskelia (Compact)</span>
+                </div>
+                <div class="comp-row">
+                    <span class="tag"><i class="adk adk-dwennimmen"></i> Skeleton</span>
+                    <span class="val gold">Heavy, dense bone</span>
+                </div>
+                <div class="comp-row">
+                    <span class="tag"><i class="adk adk-mako"></i> Musculature</span>
+                    <span class="val gold">Explosive power / Cut</span>
+                </div>
+                <div class="comp-row">
+                    <span class="tag"><i class="adk adk-akoma"></i> Skull / Face</span>
+                    <span class="val gold">Broad, strong jaw</span>
+                </div>
+                <div class="comp-row">
+                    <span class="tag"><i class="adk adk-bese-saka"></i> Resources</span>
+                    <span class="val gold">Minerals, gold, hydrocarbons</span>
+                </div>
+                <div class="comp-row">
+                    <span class="tag"><i class="adk adk-nsoromma"></i> Icons</span>
+                    <span class="val gold">K. Nkrumah, I. Elba, M. Essien</span>
+                </div>
+            </div>
+            <div class="comp-col">
+                <h3><i class="adk adk-nkyimu" style="color:#7a8b9f;"></i> Branch 2 · Northern</h3>
+                <div class="comp-row">
+                    <span class="tag"><i class="adk adk-sunsum"></i> Somatotype</span>
+                    <span class="val">Ectomorph (Elongated)</span>
+                </div>
+                <div class="comp-row">
+                    <span class="tag"><i class="adk adk-mmere-dane"></i> Proportions</span>
+                    <span class="val">Macroschelia (Long‑legged)</span>
+                </div>
+                <div class="comp-row">
+                    <span class="tag"><i class="adk adk-dwennimmen"></i> Skeleton</span>
+                    <span class="val">Light, thin bone</span>
+                </div>
+                <div class="comp-row">
+                    <span class="tag"><i class="adk adk-mako"></i> Musculature</span>
+                    <span class="val">Endurance / Lean mass</span>
+                </div>
+                <div class="comp-row">
+                    <span class="tag"><i class="adk adk-akoma"></i> Skull / Face</span>
+                    <span class="val">Narrow, elongated oval</span>
+                </div>
+                <div class="comp-row">
+                    <span class="tag"><i class="adk adk-bese-saka"></i> Resources</span>
+                    <span class="val">Logistics, transit, livestock</span>
+                </div>
+                <div class="comp-row">
+                    <span class="tag"><i class="adk adk-nsoromma"></i> Icons</span>
+                    <span class="val">T. Sankara, H. Limann, S. Muntari</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <i class="adk adk-nyame-nnwu-na-mawu"></i> WEST AFRICAN GENE POOL · TWO BRANCHES &nbsp;|&nbsp;
+            <span class="highlight"><i class="adk adk-adinkrahene"></i> Ahiakwa Tette</span> · Gold &amp; Technology &nbsp;|&nbsp;
+            <i class="adk adk-agyindawuru"></i> terminal active
+        </div>
+
+    </div>
+</body>
+</html>
