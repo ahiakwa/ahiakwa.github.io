@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AHIAKWA COCOA | Supply Request</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --bg: #0f1115;
+    --card: #161a22;
+    --text: #e6e8ec;
+    --muted: #8b93a3;
+    --accent: #d4a24a;
+    --accent-hover: #e0b05c;
+    --border: #232936;
+    --input-bg: #1b202a;
+    --error: #e26a6a;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px; line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    scrollbar-width: none; -ms-overflow-style: none;
+  }
+  html::-webkit-scrollbar, body::-webkit-scrollbar, *::-webkit-scrollbar { display: none; width: 0; height: 0; }
+  * { scrollbar-width: none; -ms-overflow-style: none; }
+
+  /* Hide default number input spinners */
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+  }
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
+  .app-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+  }
+
+  /* Header & Lang Toggle */
+  .top-bar {
+    width: 100%;
+    max-width: 680px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--text);
+  }
+
+  .brand i { color: var(--accent); font-size: 20px; }
+
+  .lang-switch {
+    display: flex;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .lang-btn {
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    transition: all 0.2s ease;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .lang-btn.active {
+    background: rgba(212, 162, 74, 0.15);
+    color: var(--accent);
+  }
+
+  /* Pricing Banner */
+  .price-banner {
+    width: 100%;
+    max-width: 680px;
+    background: linear-gradient(135deg, rgba(212,162,74,0.08), rgba(212,162,74,0.02));
+    border: 1px solid rgba(212, 162, 74, 0.25);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .price-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .price-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .price-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: #6fcf97;
+  }
+
+  .price-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* Form Card */
+  .form-container {
+    width: 100%;
+    max-width: 680px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+
+  .header-title {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .header-title h1 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 8px;
+    letter-spacing: 0.02em;
+  }
+
+  .header-title p {
+    color: var(--muted);
+    font-size: 13px;
+    margin: 0;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  label {
+    display: block;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  input, textarea {
+    width: 100%;
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.2s ease, outline 0.2s ease;
+  }
+
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  input:user-invalid, .custom-select.invalid .select-selected {
+    border-color: var(--error);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  /* Custom Select */
+  .custom-select {
+    position: relative;
+    user-select: none;
+    width: 100%;
+  }
+
+  .select-selected {
+    width: 100%;
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .select-selected.has-value {
+    color: var(--text);
+  }
+
+  .custom-select:focus-within .select-selected {
+    border-color: var(--accent);
+    outline: none;
+  }
+
+  .select-selected i {
+    font-size: 10px;
+    color: var(--muted);
+    transition: transform 0.2s ease;
+  }
+
+  .custom-select.open .select-selected i {
+    transform: rotate(180deg);
+  }
+
+  .select-items {
+    position: absolute;
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    z-index: 99;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+  }
+  
+  .select-items::-webkit-scrollbar { display: none; }
+  .select-items { -ms-overflow-style: none; scrollbar-width: none; }
+
+  .custom-select.open .select-items {
+    display: block;
+  }
+
+  .select-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text);
+    transition: background 0.15s ease;
+  }
+
+  .select-item:hover, .select-item.selected {
+    background: rgba(212, 162, 74, 0.1);
+    color: var(--accent);
+  }
+
+  /* Submit Button */
+  button[type="submit"] {
+    width: 100%;
+    background: var(--accent);
+    color: #0f1115;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  button[type="submit"]:hover {
+    background: var(--accent-hover);
+  }
+
+  button[type="submit"]:active {
+    transform: scale(0.98);
+  }
+
+  @media (max-width: 600px) {
+    .form-container { padding: 24px; }
+    .row { grid-template-columns: 1fr; gap: 0; }
+    .price-banner { grid-template-columns: 1fr; gap: 12px; }
+    .top-bar { flex-direction: column; align-items: flex-start; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app-wrapper">
+  
+  <div class="top-bar">
+    <div class="brand">
+      <i class="fa-solid fa-seedling"></i>
+      AHIAKWA COCOA
+    </div>
+    <div class="lang-switch">
+      <button class="lang-btn" onclick="setLanguage('ru')">RU</button>
+      <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
+    </div>
+  </div>
+
+  <div class="price-banner">
+    <div class="price-item">
+      <div class="price-label" data-i18n="price_b2b">B2B (Wholesale)</div>
+      <div class="price-value">$5,200 / t</div>
+      <div class="price-sub" data-i18n="price_b2b_sub">FOB Ghana / Grade 1</div>
+    </div>
+    <div class="price-item">
+      <div class="price-label" data-i18n="price_b2c">D2C (Packaged)</div>
+      <div class="price-value">$25,800 / t</div>
+      <div class="price-sub" data-i18n="price_b2c_sub">~ $25.8 / kg (Russian Retail)</div>
+    </div>
+  </div>
+
+  <div class="form-container">
+    <div class="header-title">
+      <h1 data-i18n="form_title">Cocoa Supply Request</h1>
+      <p data-i18n="form_subtitle">Leave your details and our manager will contact you.</p>
+    </div>
+
+    <!-- FormSubmit Configuration -->
+    <form action="https://formsubmit.co/ahiakvagt@gmail.com" method="POST" id="cocoaForm" onsubmit="return validateForm(event)">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_subject" value="New B2B Lead - AHIAKWA COCOA">
+      <input type="hidden" name="_template" value="table">
+
+      <div class="form-group">
+        <label for="company" data-i18n="lbl_company">Company Name *</label>
+        <input type="text" id="company" name="Company" required placeholder="Chocolate LLC" data-i18n-placeholder="ph_company">
+      </div>
+
+      <div class="row">
+        <div class="form-group">
+          <label for="name" data-i18n="lbl_name">Contact Person *</label>
+          <input type="text" id="name" name="Contact Person" required placeholder="John Doe" data-i18n-placeholder="ph_name">
+        </div>
+        <div class="form-group">
+          <label for="phone" data-i18n="lbl_phone">Phone *</label>
+          <input type="tel" id="phone" name="Phone" required placeholder="+1 (999) 000-00-00" data-i18n-placeholder="ph_phone">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email" data-i18n="lbl_email">Email *</label>
+        <input type="email" id="email" name="Email" required placeholder="john@company.com" data-i18n-placeholder="ph_email">
+      </div>
+
+      <div class="row">
+        <div class="form-group">
+          <label data-i18n="lbl_business">Business Type *</label>
+          
+          <!-- Custom Select HTML -->
+          <div class="custom-select" id="businessSelect" tabindex="0">
+            <div class="select-selected" id="selectSelected" data-i18n="select_placeholder">Select...</div>
+            <div class="select-items" id="selectItems">
+              <div class="select-item" data-value="factory" data-i18n="opt_factory">Confectionery Factory</div>
+              <div class="select-item" data-value="distributor" data-i18n="opt_distributor">Distributor / Wholesaler</div>
+              <div class="select-item" data-value="retail" data-i18n="opt_retail">Retail / Marketplaces</div>
+              <div class="select-item" data-value="other" data-i18n="opt_other">Other</div>
+            </div>
+          </div>
+          <!-- Hidden input to store value for form submission -->
+          <input type="hidden" name="Business Type" id="businessInput" required>
+        </div>
+
+        <div class="form-group">
+          <label for="volume" data-i18n="lbl_volume">Volume (tons) *</label>
+          <input type="number" id="volume" name="Volume" required placeholder="50" min="1" data-i18n-placeholder="ph_volume">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="message" data-i18n="lbl_message">Message</label>
+        <textarea id="message" name="Message" placeholder="Additional requirements..." data-i18n-placeholder="ph_message"></textarea>
+      </div>
+
+      <button type="submit" id="submitBtn">
+        <i class="fa-solid fa-paper-plane"></i> 
+        <span data-i18n="btn_submit">Submit Request</span>
+      </button>
+    </form>
+  </div>
+</div>
+
+<script>
+  // --- Translations Dictionary ---
+  const translations = {
+    en: {
+      price_b2b: "B2B (Wholesale)",
+      price_b2b_sub: "FOB Ghana / Grade 1",
+      price_b2c: "D2C (Packaged)",
+      price_b2c_sub: "~ $25.8 / kg (Russian Retail)",
+      form_title: "Cocoa Supply Request",
+      form_subtitle: "Leave your details and our manager will contact you.",
+      lbl_company: "Company Name *",
+      ph_company: "Chocolate LLC",
+      lbl_name: "Contact Person *",
+      ph_name: "John Doe",
+      lbl_phone: "Phone *",
+      ph_phone: "+1 (999) 000-00-00",
+      lbl_email: "Email *",
+      ph_email: "john@company.com",
+      lbl_business: "Business Type *",
+      select_placeholder: "Select...",
+      opt_factory: "Confectionery Factory",
+      opt_distributor: "Distributor / Wholesaler",
+      opt_retail: "Retail / Marketplaces",
+      opt_other: "Other",
+      lbl_volume: "Volume (tons) *",
+      ph_volume: "50",
+      lbl_message: "Message",
+      ph_message: "Additional requirements...",
+      btn_submit: "Submit Request"
+    },
+    ru: {
+      price_b2b: "B2B (Опт)",
+      price_b2b_sub: "FOB Гана / Grade 1",
+      price_b2c: "D2C (Фасовка)",
+      price_b2c_sub: "~ 2 500 ₽ / кг (Розница РФ)",
+      form_title: "Заявка на поставку какао",
+      form_subtitle: "Оставьте свои данные, и наш менеджер свяжется с вами.",
+      lbl_company: "Название компании *",
+      ph_company: "ООО «Шоколад»",
+      lbl_name: "Контактное лицо *",
+      ph_name: "Иван Иванов",
+      lbl_phone: "Телефон *",
+      ph_phone: "+7 (999) 000-00-00",
+      lbl_email: "Email *",
+      ph_email: "ivan@company.ru",
+      lbl_business: "Тип бизнеса *",
+      select_placeholder: "Выберите...",
+      opt_factory: "Кондитерская фабрика",
+      opt_distributor: "Дистрибьютор / Оптовик",
+      opt_retail: "Розница / Маркетплейсы",
+      opt_other: "Другое",
+      lbl_volume: "Объем (тонн) *",
+      ph_volume: "50",
+      lbl_message: "Комментарий",
+      ph_message: "Дополнительные требования...",
+      btn_submit: "Отправить заявку"
+    }
+  };
+
+  let currentLang = 'en';
+
+  // --- Language Switcher Logic ---
+  function setLanguage(lang) {
+    currentLang = lang;
+    
+    // Update active button state
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+    });
+
+    // Update elements with data-i18n
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[lang][key]) {
+        // If it's the select placeholder and a value is selected, don't overwrite
+        if (el.id === 'selectSelected' && el.classList.contains('has-value')) {
+           return; 
+        }
+        el.textContent = translations[lang][key];
+      }
+    });
+
+    // Update placeholders
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      if (translations[lang][key]) {
+        el.setAttribute('placeholder', translations[lang][key]);
+      }
+    });
+  }
+
+  // --- Custom Select Logic ---
+  const customSelect = document.getElementById('businessSelect');
+  const selectSelected = document.getElementById('selectSelected');
+  const selectItems = document.getElementById('selectItems');
+  const businessInput = document.getElementById('businessInput');
+  const items = selectItems.querySelectorAll('.select-item');
+
+  // Toggle dropdown
+  customSelect.addEventListener('click', function(e) {
+    if (e.target.closest('.select-items')) return; // Ignore clicks inside items
+    customSelect.classList.toggle('open');
+  });
+
+  // Close on outside click
+  document.addEventListener('click', function(e) {
+    if (!customSelect.contains(e.target)) {
+      customSelect.classList.remove('open');
+    }
+  });
+
+  // Handle item selection
+  items.forEach(item => {
+    item.addEventListener('click', function() {
+      // Get text based on current language
+      const i18nKey = this.getAttribute('data-i18n');
+      const text = translations[currentLang][i18nKey];
+      const value = this.getAttribute('data-value');
+
+      // Update UI
+      selectSelected.textContent = text;
+      selectSelected.classList.add('has-value');
+      
+      // Update hidden input
+      businessInput.value = text; 
+      
+      // Highlight selected
+      items.forEach(i => i.classList.remove('selected'));
+      this.classList.add('selected');
+
+      // Close & clear validation
+      customSelect.classList.remove('open');
+      customSelect.classList.remove('invalid');
+    });
+  });
+
+  // --- Form Validation Logic ---
+  function validateForm(e) {
+    let isValid = true;
+    
+    // Check custom select
+    if (!businessInput.value) {
+      isValid = false;
+      customSelect.classList.add('invalid');
+    } else {
+      customSelect.classList.remove('invalid');
+    }
+
+    if (!isValid) {
+      e.preventDefault(); // Stop submission
+    }
+    
+    return isValid;
+  }
+
+  // Initialize default language (English is already set in HTML, but this ensures JS state matches)
+  setLanguage('en');
+</script>
+
+</body>
+</html>
