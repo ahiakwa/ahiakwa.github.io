@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AHIAKWA COCOA | Supply Request</title>
+<title>KWA COCOA | Supply Request</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
   :root {
@@ -16,6 +16,7 @@
     --border: #232936;
     --input-bg: #1b202a;
     --error: #e26a6a;
+    --success: #6fcf97;
   }
 
   * { box-sizing: border-box; }
@@ -127,7 +128,7 @@
   .price-value {
     font-size: 18px;
     font-weight: 600;
-    color: #6fcf97;
+    color: var(--success);
   }
 
   .price-sub {
@@ -145,6 +146,7 @@
     border-radius: 12px;
     padding: 32px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    position: relative;
   }
 
   .header-title {
@@ -307,13 +309,44 @@
     margin-top: 12px;
   }
 
-  button[type="submit"]:hover {
+  button[type="submit"]:hover:not(:disabled) {
     background: var(--accent-hover);
   }
 
-  button[type="submit"]:active {
+  button[type="submit"]:active:not(:disabled) {
     transform: scale(0.98);
   }
+
+  button[type="submit"]:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  /* Toast Notification */
+  .toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100px);
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 16px 24px;
+    border-radius: 8px;
+    font-weight: 500;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .toast.show {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .toast.success { border-color: var(--success); color: var(--success); }
+  .toast.error { border-color: var(--error); color: var(--error); }
 
   @media (max-width: 600px) {
     .form-container { padding: 24px; }
@@ -325,12 +358,18 @@
 </head>
 <body>
 
+<!-- Toast Container -->
+<div id="toast" class="toast">
+  <i id="toastIcon" class="fa-solid"></i>
+  <span id="toastMessage"></span>
+</div>
+
 <div class="app-wrapper">
   
   <div class="top-bar">
     <div class="brand">
       <i class="fa-solid fa-seedling"></i>
-      AHIAKWA COCOA
+      KWA COCOA
     </div>
     <div class="lang-switch">
       <button class="lang-btn" onclick="setLanguage('ru')">RU</button>
@@ -357,11 +396,15 @@
       <p data-i18n="form_subtitle">Leave your details and our manager will contact you.</p>
     </div>
 
-    <!-- FormSubmit Configuration -->
-    <form action="https://formsubmit.co/ahiakvagt@gmail.com" method="POST" id="cocoaForm" onsubmit="return validateForm(event)">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_subject" value="New B2B Lead - AHIAKWA COCOA">
-      <input type="hidden" name="_template" value="table">
+    <!-- Web3Forms Integration -->
+    <form id="cocoaForm" onsubmit="return submitForm(event)">
+      
+      <!-- Web3Forms Access Key -->
+      <input type="hidden" name="access_key" value="8f15fd00-7f2b-4101-b661-bcb490d8f3a6">
+      <!-- Email Subject -->
+      <input type="hidden" name="subject" value="New B2B Lead - AHIAKWA COCOA">
+      <!-- Optional: From Name -->
+      <input type="hidden" name="from_name" value="AHIAKWA COCOA Website">
 
       <div class="form-group">
         <label for="company" data-i18n="lbl_company">Company Name *</label>
@@ -449,7 +492,10 @@
       ph_volume: "50",
       lbl_message: "Message",
       ph_message: "Additional requirements...",
-      btn_submit: "Submit Request"
+      btn_submit: "Submit Request",
+      msg_success: "Request sent successfully!",
+      msg_error: "Something went wrong. Please try again.",
+      msg_sending: "Sending..."
     },
     ru: {
       price_b2b: "B2B (Опт)",
@@ -476,7 +522,10 @@
       ph_volume: "50",
       lbl_message: "Комментарий",
       ph_message: "Дополнительные требования...",
-      btn_submit: "Отправить заявку"
+      btn_submit: "Отправить заявку",
+      msg_success: "Заявка успешно отправлена!",
+      msg_error: "Произошла ошибка. Пожалуйста, попробуйте снова.",
+      msg_sending: "Отправка..."
     }
   };
 
@@ -557,8 +606,30 @@
     });
   });
 
-  // --- Form Validation Logic ---
-  function validateForm(e) {
+  // --- Toast Logic ---
+  const toast = document.getElementById('toast');
+  const toastIcon = document.getElementById('toastIcon');
+  const toastMessage = document.getElementById('toastMessage');
+
+  function showToast(message, type) {
+    toastMessage.textContent = message;
+    toast.className = `toast show ${type}`;
+    
+    if (type === 'success') {
+      toastIcon.className = 'fa-solid fa-circle-check';
+    } else {
+      toastIcon.className = 'fa-solid fa-circle-exclamation';
+    }
+
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 4000);
+  }
+
+  // --- Form Submission & Validation Logic ---
+  function submitForm(e) {
+    e.preventDefault(); // Stop standard submission
+
     let isValid = true;
     
     // Check custom select
@@ -569,11 +640,64 @@
       customSelect.classList.remove('invalid');
     }
 
-    if (!isValid) {
-      e.preventDefault(); // Stop submission
+    // Check other required fields natively
+    const form = document.getElementById('cocoaForm');
+    if (!form.checkValidity()) {
+      isValid = false;
+      // Let the browser show native validation bubbles for standard inputs
+      form.reportValidity();
     }
-    
-    return isValid;
+
+    if (!isValid) return false;
+
+    // Proceed with AJAX Submission via Web3Forms
+    const submitBtn = document.getElementById('submitBtn');
+    const originalBtnText = submitBtn.innerHTML;
+
+    submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>${translations[currentLang].msg_sending}</span>`;
+    submitBtn.disabled = true;
+
+    const formData = new FormData(form);
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: json
+    })
+    .then(async (response) => {
+      let json = await response.json();
+      if (response.status == 200) {
+        // Success
+        showToast(translations[currentLang].msg_success, 'success');
+        form.reset();
+        
+        // Reset Custom Select UI
+        selectSelected.classList.remove('has-value');
+        selectSelected.textContent = translations[currentLang]['select_placeholder'];
+        businessInput.value = '';
+        items.forEach(i => i.classList.remove('selected'));
+        
+      } else {
+        // Error from Web3Forms
+        console.log(response);
+        showToast(json.message || translations[currentLang].msg_error, 'error');
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      showToast(translations[currentLang].msg_error, 'error');
+    })
+    .finally(() => {
+      submitBtn.innerHTML = originalBtnText;
+      submitBtn.disabled = false;
+    });
+
+    return false;
   }
 
   // Initialize default language (English is already set in HTML, but this ensures JS state matches)
