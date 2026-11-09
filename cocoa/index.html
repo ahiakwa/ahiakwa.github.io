@@ -91,7 +91,6 @@
     color: var(--accent);
   }
 
-  /* Обновленный блок с ценами и характеристиками */
   .price-banner {
     width: 100%;
     max-width: 680px;
@@ -103,6 +102,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
+    align-items: start;
   }
 
   .price-item { display: flex; flex-direction: column; }
@@ -130,6 +130,21 @@
     font-size: 11px;
     color: var(--muted);
     margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  .price-note {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 6px;
+    font-style: italic;
+    line-height: 1.4;
+  }
+
+  .price-products {
+    font-size: 11px;
+    color: var(--text);
+    margin-top: 6px;
     line-height: 1.4;
   }
 
@@ -185,7 +200,6 @@
 
   .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
-  /* Custom Select */
   .custom-select {
     position: relative;
     user-select: none;
@@ -269,7 +283,22 @@
   button[type="submit"]:active:not(:disabled) { transform: scale(0.98); }
   button[type="submit"]:disabled { opacity: 0.7; cursor: not-allowed; }
 
-  /* Toast Notification */
+  .payment-notice {
+    margin-top: 20px;
+    padding: 14px 16px;
+    background: rgba(212, 162, 74, 0.06);
+    border: 1px solid rgba(212, 162, 74, 0.2);
+    border-radius: 8px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .payment-notice i {
+    color: var(--accent);
+    margin-right: 6px;
+  }
+
   .toast {
     position: fixed;
     top: 20px;
@@ -286,6 +315,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
+    max-width: 90vw;
   }
 
   .toast.show { transform: translateX(-50%) translateY(0); }
@@ -305,7 +335,6 @@
 </head>
 <body>
 
-<!-- Toast Container -->
 <div id="toast" class="toast">
   <i id="toastIcon" class="fa-solid"></i>
   <span id="toastMessage"></span>
@@ -324,27 +353,29 @@
     </div>
   </div>
 
-  <!-- Информационный блок -->
+  <!-- Task 1, 2, 3: Обновлённый информационный блок -->
   <div class="price-banner">
     <div class="price-item">
       <div class="price-label" data-i18n="price_b2b">B2B (Wholesale)</div>
       <div class="price-value">$5,200 / t</div>
-      <div class="price-sub" data-i18n="price_b2b_sub">FOB Ghana / Grade 1</div>
+      <div class="price-sub" data-i18n="price_b2b_sub">FOB Ghana or CFR Russian ports (Saint Petersburg, Novorossiysk) available</div>
+      <div class="price-note" data-i18n="price_b2b_note">Final price depends on delivery terms (Incoterms 2020).</div>
     </div>
     <div class="price-item">
-      <div class="price-label" data-i18n="price_b2c">D2C (Packaged)</div>
+      <div class="price-label" data-i18n="price_b2c">Premium Artisan / Micro-Lots (Bagged)</div>
       <div class="price-value">$25,800 / t</div>
       <div class="price-sub" data-i18n="price_b2c_sub">~ $25.8 / kg (Retail)</div>
     </div>
     <div class="price-item">
       <div class="price-label" data-i18n="spec_origin">Origin & Profile</div>
       <div class="price-value spec" data-i18n="spec_origin_val">Ghana</div>
-      <div class="price-sub" data-i18n="spec_char_val">Forastero, Grade 1, well-fermented, < 7.5% moisture</div>
+      <div class="price-sub" data-i18n="spec_char_val">Forastero, Grade 1, well-fermented, &lt; 7.5% moisture</div>
+      <div class="price-products" data-i18n="spec_products">Available: Raw Cocoa Beans, Cocoa Liquor, Cocoa Butter, Cocoa Powder.</div>
     </div>
     <div class="price-item">
       <div class="price-label" data-i18n="spec_certs">Certificates</div>
       <div class="price-value spec" data-i18n="spec_certs_val">QCC, Phyto, Fumigation</div>
-      <div class="price-sub" data-i18n="spec_trace_val">EUDR-ready / Traceable</div>
+      <div class="price-sub" data-i18n="spec_trace_val">EAC Compliant (TR CU 021/2011) / Traceable</div>
     </div>
   </div>
 
@@ -354,12 +385,22 @@
       <p data-i18n="form_subtitle">Leave your details and our manager will contact you.</p>
     </div>
 
-    <!-- Web3Forms Integration -->
+    <!--
+      Task 6: Form submission
+      - Пока CONFIG.WORKER_URL пуст — форма отправляется напрямую в Web3Forms (fallback).
+      - Когда Cloudflare Worker будет развёрнут — впишите его URL в CONFIG.WORKER_URL ниже,
+        после чего можно удалить скрытый access_key из этой формы (он всё равно перестанет использоваться).
+    -->
     <form id="cocoaForm" onsubmit="submitForm(event)">
-      
+
       <input type="hidden" name="access_key" value="8f15fd00-7f2b-4101-b661-bcb490d8f3a6">
       <input type="hidden" name="subject" value="New B2B Lead - KWA COCOA">
       <input type="hidden" name="from_name" value="KWA COCOA Website">
+
+      <!-- Honeypot (Task 6): скрытое поле для отсева ботов -->
+      <input type="text" name="bot_field" tabindex="-1" autocomplete="off"
+             aria-hidden="true"
+             style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
 
       <div class="form-group">
         <label for="company" data-i18n="lbl_company">Company Name *</label>
@@ -385,13 +426,13 @@
       <div class="row">
         <div class="form-group">
           <label data-i18n="lbl_business">Business Type *</label>
-          
+
           <div class="custom-select" id="businessSelect" tabindex="0">
             <div class="select-selected" id="selectSelected" data-i18n="select_placeholder">Select...</div>
             <div class="select-items" id="selectItems">
-              <div class="select-item" data-value="factory" data-i18n="opt_factory">Confectionery Factory</div>
-              <div class="select-item" data-value="distributor" data-i18n="opt_distributor">Distributor / Wholesaler</div>
-              <div class="select-item" data-value="retail" data-i18n="opt_retail">Retail / Marketplaces</div>
+              <div class="select-item" data-value="factory" data-i18n="opt_factory">Confectionery / Chocolate Factory</div>
+              <div class="select-item" data-value="distributor" data-i18n="opt_distributor">B2B Food Ingredients Distributor</div>
+              <div class="select-item" data-value="artisan" data-i18n="opt_artisan">Artisan Chocolate Maker / Specialty Roaster</div>
               <div class="select-item" data-value="other" data-i18n="opt_other">Other</div>
             </div>
           </div>
@@ -414,61 +455,95 @@
         <span data-i18n="btn_submit">Submit Request</span>
       </button>
     </form>
+
+    <!-- Task 5: Условия оплаты (универсальная формулировка) -->
+    <div class="payment-notice">
+      <i class="fa-solid fa-file-invoice-dollar"></i>
+      <span data-i18n="payment_notice">Payment terms: Flexible trade finance options available. Payment structures and instruments are negotiated individually with each client to ensure secure cross-border transactions. Incoterms 2020.</span>
+    </div>
   </div>
 </div>
 
 <script>
+  // --- Task 6: Configuration ---
+  // Когда Cloudflare Worker будет готов — впишите его URL сюда,
+  // например: "https://kwa-cocoa.<account>.workers.dev/submit".
+  // Пока пусто — работает fallback напрямую через Web3Forms.
+  const CONFIG = {
+    WORKER_URL: "",
+    WEB3FORMS_URL: "https://api.web3forms.com/submit"
+  };
+
   // --- Translations Dictionary ---
   const translations = {
     en: {
-      price_b2b: "B2B (Wholesale)", price_b2b_sub: "FOB Ghana / Grade 1",
-      price_b2c: "D2C (Packaged)", price_b2c_sub: "~ $25.8 / kg (Retail)",
+      price_b2b: "B2B (Wholesale)",
+      price_b2b_sub: "FOB Ghana or CFR Russian ports (Saint Petersburg, Novorossiysk) available",
+      price_b2b_note: "Final price depends on delivery terms (Incoterms 2020).",
+      price_b2c: "Premium Artisan / Micro-Lots (Bagged)",
+      price_b2c_sub: "~ $25.8 / kg (Retail)",
       spec_origin: "Origin & Profile",
       spec_origin_val: "Ghana",
       spec_char_val: "Forastero, Grade 1, well-fermented, < 7.5% moisture",
+      spec_products: "Available: Raw Cocoa Beans, Cocoa Liquor, Cocoa Butter, Cocoa Powder.",
       spec_certs: "Certificates",
       spec_certs_val: "QCC, Phyto, Fumigation",
-      spec_trace_val: "EUDR-ready / Traceable",
-      form_title: "Cocoa Supply Request", form_subtitle: "Leave your details and our manager will contact you.",
+      spec_trace_val: "EAC Compliant (TR CU 021/2011) / Traceable",
+      form_title: "Cocoa Supply Request",
+      form_subtitle: "Leave your details and our manager will contact you.",
       lbl_company: "Company Name *", ph_company: "Chocolate LLC",
       lbl_name: "Contact Person *", ph_name: "John Doe",
       lbl_phone: "Phone *", ph_phone: "+1 (999) 000-00-00",
       lbl_email: "Email *", ph_email: "john@company.com",
       lbl_business: "Business Type *", select_placeholder: "Select...",
-      opt_factory: "Confectionery Factory", opt_distributor: "Distributor / Wholesaler",
-      opt_retail: "Retail / Marketplaces", opt_other: "Other",
+      opt_factory: "Confectionery / Chocolate Factory",
+      opt_distributor: "B2B Food Ingredients Distributor",
+      opt_artisan: "Artisan Chocolate Maker / Specialty Roaster",
+      opt_other: "Other",
       lbl_volume: "Volume (tons) *", ph_volume: "50",
       lbl_message: "Message", ph_message: "Additional requirements...",
-      btn_submit: "Submit Request", msg_success: "Request sent successfully!",
-      msg_error: "Something went wrong. Please try again.", msg_sending: "Sending..."
+      btn_submit: "Submit Request",
+      msg_success: "Request sent successfully!",
+      msg_error: "Something went wrong. Please try again.",
+      msg_sending: "Sending...",
+      payment_notice: "Payment terms: Flexible trade finance options available. Payment structures and instruments are negotiated individually with each client to ensure secure cross-border transactions. Incoterms 2020."
     },
     ru: {
-      price_b2b: "B2B (Опт)", price_b2b_sub: "FOB Гана / Grade 1",
-      price_b2c: "D2C (Фасовка)", price_b2c_sub: "~ 2 500 ₽ / кг (Розница)",
+      price_b2b: "B2B (Опт)",
+      price_b2b_sub: "FOB Гана или CFR порты РФ (Санкт-Петербург, Новороссийск)",
+      price_b2b_note: "Финальная цена зависит от условий поставки (Инкотермс 2020).",
+      price_b2c: "Премиум / Микро-лоты (в мешках)",
+      price_b2c_sub: "~ 2 500 ₽ / кг (Розница)",
       spec_origin: "Происхождение и сорт",
       spec_origin_val: "Гана",
-      spec_char_val: "Forastero, Grade 1, отличная ферментация, влажность < 7.5%",
+      spec_char_val: "Форастеро, 1-й сорт (Grade 1), ферментированные, влажность < 7.5%",
+      spec_products: "Доступно: сырые какао-бобы, какао-тертое, какао-масло, какао-порошок.",
       spec_certs: "Сертификаты",
-      spec_certs_val: "QCC, Фитосанитарный, Фумигация",
-      spec_trace_val: "EUDR-ready / Прослеживаемость",
-      form_title: "Заявка на поставку какао", form_subtitle: "Оставьте свои данные, и наш менеджер свяжется с вами.",
+      spec_certs_val: "QCC, Фитосанитарный, Фумигационный",
+      spec_trace_val: "Соответствует ТР ТС 021/2011 (ЕАЭС) / Прослеживаемость",
+      form_title: "Заявка на поставку какао",
+      form_subtitle: "Оставьте свои данные, и наш менеджер свяжется с вами.",
       lbl_company: "Название компании *", ph_company: "ООО «Шоколад»",
       lbl_name: "Контактное лицо *", ph_name: "Иван Иванов",
       lbl_phone: "Телефон *", ph_phone: "+7 (999) 000-00-00",
       lbl_email: "Email *", ph_email: "ivan@company.ru",
       lbl_business: "Тип бизнеса *", select_placeholder: "Выберите...",
-      opt_factory: "Кондитерская фабрика", opt_distributor: "Дистрибьютор / Оптовик",
-      opt_retail: "Розница / Маркетплейсы", opt_other: "Другое",
+      opt_factory: "Кондитерская фабрика / Производство",
+      opt_distributor: "Дистрибьютор пищевого сырья (B2B)",
+      opt_artisan: "Крафтовый производитель / Bean-to-Bar",
+      opt_other: "Другое",
       lbl_volume: "Объем (тонн) *", ph_volume: "50",
       lbl_message: "Комментарий", ph_message: "Дополнительные требования...",
-      btn_submit: "Отправить заявку", msg_success: "Заявка успешно отправлена!",
-      msg_error: "Произошла ошибка. Пожалуйста, попробуйте снова.", msg_sending: "Отправка..."
+      btn_submit: "Отправить заявку",
+      msg_success: "Заявка успешно отправлена!",
+      msg_error: "Произошла ошибка. Пожалуйста, попробуйте снова.",
+      msg_sending: "Отправка...",
+      payment_notice: "Условия оплаты: Доступны гибкие инструменты торгового финансирования. Структура расчетов и платежные инструменты обсуждаются индивидуально с каждым клиентом для обеспечения безопасности трансграничных сделок. Incoterms 2020."
     }
   };
 
   let currentLang = 'en';
 
-  // --- Language Switcher Logic ---
   function setLanguage(lang) {
     currentLang = lang;
     document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -478,7 +553,7 @@
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       if (translations[lang][key]) {
-        if (el.id === 'selectSelected' && el.classList.contains('has-value')) return; 
+        if (el.id === 'selectSelected' && el.classList.contains('has-value')) return;
         el.textContent = translations[lang][key];
       }
     });
@@ -489,6 +564,17 @@
         el.setAttribute('placeholder', translations[lang][key]);
       }
     });
+
+    // Если в кастомном селекте уже что-то выбрано — обновим текст при смене языка
+    if (businessInput.value) {
+      const selectedItem = [...items].find(i => i.classList.contains('selected'));
+      if (selectedItem) {
+        const i18nKey = selectedItem.getAttribute('data-i18n');
+        const newText = translations[lang][i18nKey];
+        selectSelected.textContent = newText;
+        businessInput.value = newText;
+      }
+    }
   }
 
   // --- Custom Select Logic ---
@@ -511,11 +597,11 @@
     item.addEventListener('click', function() {
       const i18nKey = this.getAttribute('data-i18n');
       const text = translations[currentLang][i18nKey];
-      
+
       selectSelected.textContent = text;
       selectSelected.classList.add('has-value');
-      businessInput.value = text; 
-      
+      businessInput.value = text;
+
       items.forEach(i => i.classList.remove('selected'));
       this.classList.add('selected');
 
@@ -536,12 +622,20 @@
     setTimeout(() => toast.classList.remove('show'), 5000);
   }
 
-  // --- Form Submission via Web3Forms API ---
+  // --- Form Submission ---
   function submitForm(e) {
-    e.preventDefault(); 
+    e.preventDefault();
+
+    const form = document.getElementById('cocoaForm');
+
+    // Honeypot: боты заполняют скрытое поле — тихо прерываем без отправки
+    const honeypot = form.querySelector('[name="bot_field"]');
+    if (honeypot && honeypot.value.trim() !== "") {
+      return false;
+    }
 
     let isValid = true;
-    
+
     if (!businessInput.value) {
       isValid = false;
       customSelect.classList.add('invalid');
@@ -549,7 +643,6 @@
       customSelect.classList.remove('invalid');
     }
 
-    const form = document.getElementById('cocoaForm');
     if (!form.checkValidity()) {
       isValid = false;
       form.reportValidity();
@@ -564,8 +657,11 @@
 
     const formData = new FormData(form);
     const object = Object.fromEntries(formData);
-    
-    fetch('https://api.web3forms.com/submit', {
+
+    const isWorker = Boolean(CONFIG.WORKER_URL);
+    const endpoint = isWorker ? CONFIG.WORKER_URL : CONFIG.WEB3FORMS_URL;
+
+    fetch(endpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -574,17 +670,21 @@
       body: JSON.stringify(object)
     })
     .then(async (response) => {
-      let json = await response.json();
-      if (response.status === 200) {
+      let json;
+      try { json = await response.json(); } catch { json = {}; }
+
+      const ok = isWorker ? (json && json.ok === true) : (response.status === 200);
+
+      if (ok) {
         showToast(translations[currentLang].msg_success, 'success');
         form.reset();
-        
+
         selectSelected.classList.remove('has-value');
         selectSelected.textContent = translations[currentLang]['select_placeholder'];
         businessInput.value = '';
         items.forEach(i => i.classList.remove('selected'));
       } else {
-        console.error(response);
+        console.error(response, json);
         showToast(json.message || translations[currentLang].msg_error, 'error');
       }
     })
